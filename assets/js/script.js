@@ -33,10 +33,17 @@
 
 // dynamically generates divs that hold info for job postings from indeed
 // that meet minimum cost of living standard wage; these show minimum details
-// (wage and job title)
+// (wage and job title);
 // Uses this to decide whether to post or not: (if "salary of job" > costOfLivingIndex, display result;
 // if "salary of job < cost of Living Index", do not display result 
+// on each dynamically generated div, there is a save button
 
 //  when user clicks on the div, it links to the job posting on indeed
+
+// when user clicks on the save button, the job posting creates a saved div and appends
+// it to the saved results section
+// saved results are stored in localStorage
+
+// when user refreshes the page, the saved results remain
 
 
