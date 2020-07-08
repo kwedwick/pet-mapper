@@ -1,5 +1,5 @@
 //cost of living calc
-
+-----
 // type in your city and state
 
 // app uses existing cost of living calc website that searches by area code 
@@ -39,7 +39,11 @@
 // on each dynamically generated div, there is a save button
 
 //  when user clicks on the div, it links to the job posting on indeed
+-----
+// dynamically generated map for city and state has pins 
+// mapping location of the job postings
 
+------
 // when user clicks on the save button, the job posting creates a saved div and appends
 // it to the saved results section
 // saved results are stored in localStorage
