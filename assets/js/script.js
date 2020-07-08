@@ -43,7 +43,8 @@ var getWageInfo = function(state) {
     })
     
 };
-    
+//  when user clicks on the div, it links to the job posting on indeed
+
 
 
 
