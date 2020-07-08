@@ -14,13 +14,20 @@ var getJobs = function() {
 
     // set up api call to indeed.com using city and state 
     //from input
-    jobUrl = "https://api.indeed.com/ads/apisearch?publisher=123412341234123&l=" + city + "%2C+" + state + "&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
+    // jobUrl = "https://api.indeed.com/ads/apisearch?publisher=123412341234123&l=" + city + "%2C+" + state + "&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
     
-    console.log(response);
+    // console.log(response);
+
+    // create a new div to hold each job posting result returned
+    var jobPost = document.createElement("div")
+    jobPost.innerHTML = "aspects we decide to pull from each post";
+    jobPost.classList = "job-post";
+    document.body.appendChild(jobPost);
 
 
     // if the city and state return does not exist, tell user
     //to try again
+
     
 };
 
@@ -51,7 +58,7 @@ var submitCity = function(event) {
     var location = document.createElement("h1");
     location.innerHTML = city + ", " + state;
     location.classList = "location-title";
-    document.body.appendChild(location);
+    document.getElementById("resultsContainer").appendChild(location);
 
 };
 
@@ -65,7 +72,7 @@ var getWageInfo = function(state) {
     // handling the data
     .then(function(response){
         // return the average income value 
-        response = "returned value from the api";
+        response = "returned income avg value from the api";
 
         //test to see what value is returning
         console.log(response);
@@ -74,7 +81,7 @@ var getWageInfo = function(state) {
         var avBox = document.createElement("div");
         avBox.innerHTML = (response);
         avBox.classList = "avg-card";
-        document.body.appendChild(avBox);
+        document.getElementById("resultsContainer").appendChild(avBox);
 
         // sends the averag information to Indeed
         getJobs();
