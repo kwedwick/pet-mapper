@@ -28,14 +28,14 @@ var submitCity = function(event) {
 
 // function to use first api
 var getWageInfo = function(state) {
-    // establish URL
-    wageDataUrl = "https://research.zippia.com/living-wage.html";
+    // establish URL for api to return average income
+    wageDataUrl = "https://api.bls.gov/publicAPI/v2/surveys/EN";
     
     // pass URL to fetch
     fetch(wageDataUrl)
     // handling the data
     .then(function(response){
-        // return the text value as an integer
+        // return the text value 
         console.log(response);
 
     
