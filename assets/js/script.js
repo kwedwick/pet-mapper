@@ -1,8 +1,25 @@
 submitBtn = document.getElementById("submitBtn");
+var city = $('#cityEntry').val().trim();
+var state = $('#stateDropDown').val();
+
+// function that retrieves jobs that meet avg and location
+//from indeed
+var getJobs = function() {
+
+    //test to see what values are being sent here
+    console.log(city);
+    console.log(state);
+
+    // set up api call to indeed.com
+    jobUrl = "https://api.indeed.com/ads/apisearch?publisher=123412341234123&l=" + city + "%2C+" + state + "&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
+    
+    //send response to Indeed
+    console.log(jobUrl);
+    
+};
 
 
-
-// function that captures input
+// function that captures input city and state
 var submitCity = function(event) {
     // capture text entered for city
     var city = $('#cityEntry').val().trim();
@@ -24,30 +41,43 @@ var submitCity = function(event) {
         alert("Please choose a city");
     }
 
+    // create title divs for city and state
+    var location = document.createElement("h1");
+    location.innerHTML = city + ", " + state;
+    location.classList = "location-title";
+    document.body.appendChild(location);
+
 };
 
-// function to use first api
+// function to use retrieve state avg income from bls.gov api
 var getWageInfo = function(state) {
-    // establish URL for api to return average income
-    wageDataUrl = "https://api.bls.gov/publicAPI/v2/surveys/EN";
+    // establish URL for api to return average income from bls.gov
+    wageDataUrl = "	https://api.bls.gov/publicAPI/v2/timeseries/data/";
     
     // pass URL to fetch
     fetch(wageDataUrl)
     // handling the data
     .then(function(response){
-        // return the text value 
+        // return the average income value 
+        response = "returned value";
+
+        //test to see what value is returning
         console.log(response);
 
-    
+        // dynamically create new div to display the avg 
+        var avBox = document.createElement("div");
+        avBox.innerHTML = (response);
+        avBox.classList = "avg-card";
+        document.body.appendChild(avBox);
+
+        // sends the averag information to Indeed
+        getJobs();
 
 
     })
     
 };
-//  when user clicks on the div, it links to the job posting on indeed
 
 
-
-
-// when user clicks submit btn, runs function
+// when user clicks submit btn, runs function for everything
 submitBtn.addEventListener("click", submitCity);
