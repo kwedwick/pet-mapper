@@ -40,8 +40,7 @@
 
 //  when user clicks on the div, it links to the job posting on indeed
 -----
-// dynamically generated map for city and state has pins 
-// mapping location of the job postings
+
 
 ------
 // when user clicks on the save button, the job posting creates a saved div and appends
