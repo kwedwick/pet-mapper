@@ -10,11 +10,17 @@ var getJobs = function() {
     console.log(city);
     console.log(state);
 
-    // set up api call to indeed.com
+
+
+    // set up api call to indeed.com using city and state 
+    //from input
     jobUrl = "https://api.indeed.com/ads/apisearch?publisher=123412341234123&l=" + city + "%2C+" + state + "&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
     
-    //send response to Indeed
-    console.log(jobUrl);
+    console.log(response);
+
+
+    // if the city and state return does not exist, tell user
+    //to try again
     
 };
 
@@ -35,7 +41,7 @@ var submitCity = function(event) {
         console.log(city);
         cityEntry.value = "";
 
-        // if entry field is left blank
+        // if entry field is left blank or if the city 
     } else {
         //need another option; she said no alerts
         alert("Please choose a city");
@@ -59,7 +65,7 @@ var getWageInfo = function(state) {
     // handling the data
     .then(function(response){
         // return the average income value 
-        response = "returned value";
+        response = "returned value from the api";
 
         //test to see what value is returning
         console.log(response);
