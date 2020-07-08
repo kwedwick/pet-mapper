@@ -22,7 +22,7 @@ var getJobs = function() {
     var jobPost = document.createElement("div")
     jobPost.innerHTML = "aspects we decide to pull from each post";
     jobPost.classList = "job-post";
-    document.body.appendChild(jobPost);
+    document.getElementById("jobList").appendChild(jobPost);
 
 
     // if the city and state return does not exist, tell user
