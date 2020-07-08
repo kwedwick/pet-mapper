@@ -34,8 +34,9 @@ var getWageInfo = function(state) {
     // pass URL to fetch
     fetch(wageDataUrl)
     // handling the data
-    .then(function(){
+    .then(function(response){
         // return the text value as an integer
+        console.log(response);
 
     
 
