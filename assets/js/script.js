@@ -19,10 +19,20 @@ var getJobs = function() {
     // console.log(response);
 
     // create a new div to hold each job posting result returned
-    var jobPost = document.createElement("div")
+    var jobPost = document.createElement("div");
     jobPost.innerHTML = "aspects we decide to pull from each post";
     jobPost.classList = "job-post";
+    jobPost.id = "jobPost"
     document.getElementById("jobList").appendChild(jobPost);
+
+    // create save button on the dynamically created job post
+    var saveJob = document.createElement("btn");
+    saveJob.innerHTML = "Save Job";
+    saveJob.classList = "save-btn";
+    saveJob.id = "save"
+    document.getElementById("jobPost").appendChild(saveJob);
+    
+
 
 
     // if the city and state return does not exist, tell user
