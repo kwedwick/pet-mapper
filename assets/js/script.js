@@ -3,13 +3,15 @@ submitBtn = document.getElementById("submitBtn");
 
 
 // function that captures input
-var submitCity = function(event) {
+var submitCityHandler = function(event) {
+    //prevent page from refreshing
+    event.preventDefault();
     // capture text entered for city
     var city = $('#cityEntry').val().trim();
     // send city to api call
     
    // capture text entered for state
-    var state = $('#stateDropDown').val();
+    var state = $('#stateDropDown').val().toLowerCase();
     // send state to api call
     getWageInfo(state);
 
@@ -18,8 +20,9 @@ var submitCity = function(event) {
         console.log(city);
         cityEntry.value = "";
 
-        // if entry field is left blank
-    } else {
+        
+    } else { // if entry field is left blank
+
         //need another option; she said no alerts
         alert("Please choose a city");
     }
@@ -49,4 +52,4 @@ var getWageInfo = function(state) {
 
 
 // when user clicks submit btn, runs function
-submitBtn.addEventListener("click", submitCity);
+submitBtn.addEventListener("click", submitCityHandler);
