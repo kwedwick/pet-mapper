@@ -1,96 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
- git   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--added jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-    <title>Average Wage Job Finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <title>Cost-Wage Job Finder</title>
 </head>
+
 <body>
     <!--Title-->
-    <h1>Average Wage Job Finder</h1>
+    <header>
+        <h1>Living Wage Job Finder</h1>
+    </header>
 
 
-    <section id="contents">
+
+    <section id="searchWrapper" class="search-wrapper">
         <!--search bar text entry-->
-        <div id="searchBar">
-        <input id="cityEntry" type="text" value="Enter City">
-        <label for="state">State:</label>
-        <select id="stateDropDown">
-            <option value="Alabama">AL</option>
-            <option value="Alaska">AK</option>
-            <option value="Arkansa">AR</option>	
-            <option value="Arizona">AZ</option>
-            <option value="California">CA</option>
-            <option value="Colorado">CO</option>
-            <option value="Connecticut">CT</option>
-            <option value="Washington-DC">DC</option>
-            <option value="Delaware">DE</option>
-            <option value="Florida">FL</option>
-            <option value="Georgia">GA</option>
-            <option value="Hawaii">HI</option>
-            <option value="Iowa">IA</option>	
-            <option value="Idaho">ID</option>
-            <option value="Illinois">IL</option>
-            <option value="Indiana">IN</option>
-            <option value="Kansas">KS</option>
-            <option value="Kentucky">KY</option>
-            <option value="Louisiana">LA</option>
-            <option value="Massachusetts">MA</option>
-            <option value="Maryland">MD</option>
-            <option value="Maine">ME</option>
-            <option value="Michigan">MI</option>
-            <option value="Minnesota">MN</option>
-            <option value="Missouri">MO</option>	
-            <option value="Mississippi">MS</option>
-            <option value="Montana">MT</option>
-            <option value="North-carolina">NC</option>	
-            <option value="Nebraska">NE</option>
-            <option value="New-Hampshirt">NH</option>
-            <option value="New-Jersey">NJ</option>
-            <option value="New-Mexico">NM</option>			
-            <option value="Nevada">NV</option>
-            <option value="New-York">NY</option>
-            <option value="North-Dakota">ND</option>
-            <option value="Ohio">OH</option>
-            <option value="Oklahoma">OK</option>
-            <option value="Oregon">OR</option>
-            <option value="Pennsylvania">PA</option>
-            <option value="Rhode-Island">RI</option>
-            <option value="South-Carolina">SC</option>
-            <option value="South-Dakota">SD</option>
-            <option value="Tennessee">TN</option>
-            <option value="Texas">TX</option>
-            <option value="Utah">UT</option>
-            <option value="Vermont">VT</option>
-            <option value="Virginia">VA</option>
-            <option value="Washington">WA</option>
-            <option value="Wisconsin">WI</option>	
-            <option value="West-Virginia">WV</option>
-            <option value="Wyoming">WY</option>
-        </select>		
-        <button id="submitBtn" class="submit-btn" >Submit</button>
-        </div>
-
-        <!--area to hold generated results-->
-        <div id="resultsContainer">
-            <!--holds generated cost-->
-            <div id="livingCost" ></div>
-        </div>
-
-        
-
-    </section>
-    <section id="jobList">
-    </section>
-
-    <section id="storage">
-        <!--use this area to store saved search results-->
-    </section>
-    
-
-    <script src="assets/js/script.js"></script>
-</body>
-</html>
+        <form id="searchBar" class="search-container">
+            <input id="cityEntry" type="text" placeholder="Enter City" name="cityEntry">
+            <label for="state">State:</label>
+            <select id="stateDropDown">
+                <option value="alabama">AL</option>
+                <option value="alaska">AK</option>
+                <option value="arkansa">AR</option>
+                <option value="arizona">AZ</option>
+                <option value="california">CA</option>
+                <option value="colorado">CO</option>
+                <option value="connecticut">CT</option>
+                <option value="washington-dc">DC</option>
+                <option value="delaware">DE</option>
+                <option value="florida">FL</option>
+                <option value="georgia">GA</option>
+                <option value="hawaii">HI</option>
+                <option value="iowa">IA</option>
+                <option value="idaho">ID</option>
+                <option value="illinois">IL</option>
+                <option value="indiana">IN</option>
+                <option value="kansas">KS</option>
+                <option value="kentucky">KY</option>
+                <option value="louisiana">LA</option>
+                <option value="massachusetts">MA</option>
+                <option value="maryland">MD</option>
+                <option value="maine">ME</option>
+                <option value="michigan">MI</option>
+                <option value="minnesota">MN</option>
+                <option value="missouri">MO</option>
+                <option value="mississippi">MS</option>
+                <option value="montana">MT</option>
+                <option value="north-carolina">NC</option>
+                <option value="nebraska">NE</option>
+                <option value="new-hampshirt">NH</option>
+                <option value="new-jersey">NJ</option>
+                <option value="new-mexico">NM</option>
+                <option value="nevada">NV</option>
+                <option value="new-york">NY</option>
+                <option value="north-dakota">ND</option>
+                <option value="ohio">OH</option>
+                <option value="oklahoma">OK</option>
+                <option value="oregon">OR</option>
+                <option value="pennsylvania">PA</option>
+                <option value="rhode-island">RI</option>
+                <option value="south-carolina">SC</option>
+                <option value="south-dakota">SD</option>
+                <option value="tennessee">TN</option>
+                <option value="texas">TX</option>
+                <option value="utah">UT</option>
+                <option value="vermont">VT</option>
+                <option value="virginia">VA</option>
+                <option value="washington">WA</option>
+                <option value="wisconsin">WI</option>
+                <option value="west-virginia">WV</option>
+                <option value="wyoming">WY</option>
+            </select>
+            <button id="submitBtn" class="submit-btn" name="cityEntry" type="submit">Submit</button>
+        </form>

@@ -29,7 +29,7 @@ var getJobs = function() {
     var saveJob = document.createElement("btn");
     saveJob.innerHTML = "Save Job";
     saveJob.classList = "save-btn";
-    saveJob.id = "save";
+    saveJob.id = "save"
     document.getElementById("jobPost").appendChild(saveJob);
     
 
@@ -49,7 +49,7 @@ var submitCity = function(event) {
     // send city to api call
     
    // capture text entered for state
-    var state = $('#stateDropDown').val();
+    var state = $('#stateDropDown').val().toLowerCase();
     // send state to api call
     getWageInfo(state);
 
@@ -58,15 +58,11 @@ var submitCity = function(event) {
         console.log(city);
         cityEntry.value = "";
 
-        // if entry field is left "Enter City" 
-    } if (city === "Enter City"){
-        city.value = "";
+        // if entry field is left blank or if the city 
+    } else {
+        //need another option; she said no alerts
+        alert("Please choose a city");
     }
-    
-    // } else {
-    //     //need another option; she said no alerts
-    //     alert("Please choose a city");
-    // }
 
     // create title divs for city and state
     var location = document.createElement("h1");
