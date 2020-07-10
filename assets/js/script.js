@@ -3,26 +3,23 @@ submitBtn = document.getElementById("submitBtn");
 //
 
 // function that captures input
-var submitCity = function(event) {
+var submitZip = function(event) {
     // capture text entered for city
-    var city = $('#cityEntry').val().trim();
+    var zipCode = $('#zipCodeEntry').val().trim();
     // send city to api call
-    
-   // capture text entered for state
-    var state = $('#stateDropDown').val();
-    // send state to api call
-    getWageInfo(state);
 
-    // if city and state entered
-    if (city){
-        console.log(city);
-        cityEntry.value = "";
+    // if city and state entered, clear field
+    if (zipCode){
+        
+        // clear entry field
+        zipCodeEntry.value = "";
 
-        // if entry field is left blank
-    } else {
-        //need another option; she said no alerts
-        alert("Please choose a city");
-    }
+        // if entry field is not a number
+    } if (isNaN(zipCode)) {
+        
+        // prompt user to enter zip code
+        zipCodeEntry.value = "Please enter a zipcode";
+    } 
 
 };
 
@@ -49,5 +46,4 @@ var getWageInfo = function(state) {
 
 
 // when user clicks submit btn, runs function
-submitBtn.addEventListener("click", submitCity);
-© 2020 GitHub, Inc.
+submitBtn.addEventListener("click", submitZip);
