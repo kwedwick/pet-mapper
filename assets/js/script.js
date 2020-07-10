@@ -1,6 +1,6 @@
 submitBtn = document.getElementById("submitBtn");
 
-
+//
 
 // function that captures input
 var submitCity = function(event) {
