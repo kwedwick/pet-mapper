@@ -6,27 +6,27 @@
     <!--added jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
-    <title>Cost/Wage Job Finder</title>
+    <title>Job Location Finder</title>
 </head>
 <body>
     <!--Title-->
-    <h1>Living Wage Job Finder</h1>
+    <h1>Job Mapper</h1>
 
 
     <section id="contents">
         <!--search bar text entry-->
         <div id="searchBar">
-        <label for="state">Zip Code:</label>	
-        <input id="cityEntry" type="text" value="Enter zip code here">
+        <label for="zipCode">Zip Code:</label>	
+        <input id="zipCodeEntry" type="text" value="Enter zip code here">
         <button id="submitBtn" class="submit-btn" >Submit</button>
         </div>
 
         <!--area to hold generate results-->
         <div id="results-container">
-            <!--holds generated cost-->
-            <div id="livingCost"></div>
+            <!--holds entered zip code-->
+            <div id="zipCode"></div>
             <!--holds dynamically generated job postings-->
-            <div id="job-list"></div>
+            <div id="jobList"></div>
 
         </div>
 
