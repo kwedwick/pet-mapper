@@ -1,74 +1,55 @@
 submitBtn = document.getElementById("submitBtn");
+var city = $('#cityEntry').val().trim();
+var state = $('#stateDropDown').val();
 
 
-//function for second API call
-// var getMap = function ( {
+// when submitCity is clicked, capture the location and type of pet
+var submitCity = function(){
+    console.log("hi");
+}
 
+
+
+//
+
+//Adding TomTom Stuff
+
+// // Define your product name and version.
+// tt.setProductInfo('Codepen Examples', '${analytics.productVersion}');
+// var map = tt.map({
+//     key: 'ejoYhQhApDJfoTII6fG63l3BXF0tiaUV',
+//     container: 'map',
+//     style: 'tomtom://vector/1/basic-main',
+//     dragPan: !isMobileOrTablet(),
+//     center: [-99.98580752275456, 33.43211082128627],
+//     zoom: 3
 // });
-// // function that captures input
-var submitZip = function(event) {
-    // capture text entered for city
-    var zipCode = $('#zipCodeEntry').val().trim();
-    // if zip code entered, clear field
-    if (zipCode){
-        // clear entry field
-        zipCodeEntry.value = "";
-        // if entry field is not a number
-    } if (isNaN(zipCode)) {
-        // prompt user to enter zip code
-        zipCodeEntry.value = "Please enter a zipcode";
-    } ;
+// map.addControl(new tt.FullscreenControl());
+// map.addControl(new tt.NavigationControl());
+// function createMarker(icon, position, color, popupText) {
+//     var markerElement = document.createElement('div');
+//     markerElement.className = 'marker';
+//     var markerContentElement = document.createElement('div');
+//     markerContentElement.className = 'marker-content';
+//     markerContentElement.style.backgroundColor = color;
+//     markerElement.appendChild(markerContentElement);
+//     var iconElement = document.createElement('div');
+//     iconElement.className = 'marker-icon';
+//     iconElement.style.backgroundImage =
+//         'url(https://api.tomtom.com/maps-sdk-for-web/5.x/assets/images/' + icon + ')';
+//     markerContentElement.appendChild(iconElement);
+//     var popup = new tt.Popup({offset: 30}).setText(popupText);
+//     // add marker to map
+//     new tt.Marker({element: markerElement, anchor: 'bottom'})
+//         .setLngLat(position)
+//         .setPopup(popup)
+//         .addTo(map);
+// }
+// createMarker('accident.colors-white.svg', [-120.72217631449985, 42.73919549715691], '#5327c3', 'SVG icon');
+// createMarker('accident.colors-white.png', [-99.98580752275456, 33.43211082128627], '#c30b82', 'PNG icon');
+// createMarker('accident.colors-white.jpg', [43.0731, 89.4012], '#c31a26', 'JPG icon');
 
-    console.log(zipCode);
-    // send zipcode' captured value to first Api call
-    getJobs(zipCode);
-};
 
-// function for first api call
-function getJobs(){
-    // zip code specific api url being used
-    jobsUrl = "https://api.indeed.com/ads/apisearch?publisher=123412341234123&q=java+developer&l="+ zipCode;
-    // fetch relevant posts
-    fetch (jobsUrl)
 
-    // create individual posts for each job posting returned
-    .then(response => response.json())
-    
-    .then (function (data) {
-    //  need for loop here to make it run for job posts 0-9
-        console.log(data);
-
-        // for loop start
-        for (var i = 0; i < 10; i++){
-        //create divs
-        var jobPost = document.createElement("div");
-        jobPost.id = "jobPosting" + i;
-        jobPost.className = "job-class" + i;
-        document.getElementById("results-container").appendChild(jobPost);
-        
-        // job title
-        var jobTitle = document.createElement("h5");
-        jobTitle.textContent = data.results[i].jobtitle;
-        var jobCompany = document.createElement("h6");
-        jobCompany.textContent = data.results[i].company;
-        var jobLocation = document.createElement("h6");
-        jobLocation.textContent = data.results[i].formattedLocation;
-        
-        // also create a save button on each job posting
-        var jobButton = document.createElement("button");
-        // text button
-        jobButton.textContent = "save";
-        jobPost.append(jobTitle, jobCompany, jobLocation, jobButton);
-
-        // send the address from each captured posting to second api call
-        
-        getMap(data.results[i].latitude, data.results[i].longitude);
-        };   
-
-     });
-};
-
-//  when user clicks on the div, it links to the job posting on indeed
-
-// when user clicks submit btn, runs function
-submitBtn.addEventListener("click", submitZip);
+// // when user clicks submit btn, runs function for everything
+submitBtn.addEventListener("click", submitCity);
