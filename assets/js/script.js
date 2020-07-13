@@ -1,18 +1,11 @@
-submitBtn = document.getElementById("submitBtn");
-var city = $('#cityEntry').val().trim();
-var state = $('#stateDropDown').val();
 
 
-// when submitCity is clicked, capture the location and type of pet
-var submitCity = function(){
-    console.log("hi");
+// function to generate map pins
+var sendToMap = function (){
+    console.log("hello");
 }
 
-
-
-//
-
-//Adding TomTom Stuff
+// //Adding TomTom Stuff
 
 // // Define your product name and version.
 // tt.setProductInfo('Codepen Examples', '${analytics.productVersion}');
@@ -50,6 +43,47 @@ var submitCity = function(){
 // createMarker('accident.colors-white.jpg', [43.0731, 89.4012], '#c31a26', 'JPG icon');
 
 
+// function to send api call to petfinder
+var findPets = function() {
+    // petfinder api call
+    $.get()
+    .then(function(response) {
+        //function that generates pins
+        sendtoMap();
+    })
 
-// // when user clicks submit btn, runs function for everything
-submitBtn.addEventListener("click", submitCity);
+
+}
+
+// capture entered city and state and animal type
+var getLocation = function () {
+    var city = $('#cityEntry').val().trim();
+    var state = $('#stateDropDown').val();
+    var pet = $('#animalDropDown').val();
+
+    // if city and state entered
+    if (city){
+        console.log(city);
+        cityEntry.value = "";
+
+        // if entry field is left blank or if the city 
+    } else {
+        //need another option; she said no alerts
+        alert("Please choose a city for more specific results");
+    }
+
+    // checking to see captured values
+    console.log(city, state, pet);
+
+    // send captured values to petfinder
+    findPets();
+
+}
+
+//when submit button is clicked, send entered city and state to function to find pets
+$("#submitBtn").click(function () {
+    event.preventDefault();
+    // function that captures city and state
+    getLocation();
+    
+})
