@@ -1,43 +1,148 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--added jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-    <title>Job Location Finder</title>
-    <!--script to restrict character entry-->
-    
+    <!--style of for the glide mechanic-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css">
+    <!--secondary theme style for glide-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css">
+    <!--some fonts-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--tomtom mapping-->
+    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.1/maps/maps.css">
+    <link rel="stylesheet"
+        href="https://api.tomtom.com/maps-sdk-for-web/5.x/5.59.1//examples/pages/examples/assets/ui-library/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+
+    <title>Pet Mapper</title>
 </head>
+
 <body>
     <!--Title-->
-    <h1>Job Mapper</h1>
+    <header>
+        <h1>Pet Mapper</h1>
+        <p>Find pets in your area!</p>
+    </header>
 
-
-    <section id="contents">
-        <!--search bar text entry-->
-        <div id="searchBar">
-        <label for="zipCode">Zip Code:</label>	
-        <input id="zipCodeEntry" type="text" value="enter zip code" placeholder="Enter Zip Code Here">
-        <button id="submitBtn" class="submit-btn" >Submit</button>
-        </div>
+    <div class="main-container">
+        <section id="searchWrapper" class="search-wrapper">
+            <!--search bar text entry-->
+            <form id="searchBar" class="search-container">
+                <h2>Let's find a pet!</h2>
+                <label for="animal"><span>Choose a Pet:</span></label>
+                <select id="animalDropDown">
+                    <
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                    <option value="bird">Bird</option>
+                </select>
+                <label for="cityEntry"><span>City:</span></label>
+                <input id="cityEntry" type="text" placeholder="Enter City" name="cityEntry" class="city-input">
+                <label for="state"><span>State:</span></label>
+                <select id="stateDropDown" class="drop-down-input">
+                    <option value="alabama">AL</option>
+                    <option value="alaska">AK</option>
+                    <option value="arkansa">AR</option>
+                    <option value="arizona">AZ</option>
+                    <option value="california">CA</option>
+                    <option value="colorado">CO</option>
+                    <option value="connecticut">CT</option>
+                    <option value="washington-dc">DC</option>
+                    <option value="delaware">DE</option>
+                    <option value="florida">FL</option>
+                    <option value="georgia">GA</option>
+                    <option value="hawaii">HI</option>
+                    <option value="iowa">IA</option>
+                    <option value="idaho">ID</option>
+                    <option value="illinois">IL</option>
+                    <option value="indiana">IN</option>
+                    <option value="kansas">KS</option>
+                    <option value="kentucky">KY</option>
+                    <option value="louisiana">LA</option>
+                    <option value="massachusetts">MA</option>
+                    <option value="maryland">MD</option>
+                    <option value="maine">ME</option>
+                    <option value="michigan">MI</option>
+                    <option value="minnesota">MN</option>
+                    <option value="missouri">MO</option>
+                    <option value="mississippi">MS</option>
+                    <option value="montana">MT</option>
+                    <option value="north-carolina">NC</option>
+                    <option value="nebraska">NE</option>
+                    <option value="new-hampshirt">NH</option>
+                    <option value="new-jersey">NJ</option>
+                    <option value="new-mexico">NM</option>
+                    <option value="nevada">NV</option>
+                    <option value="new-york">NY</option>
+                    <option value="north-dakota">ND</option>
+                    <option value="ohio">OH</option>
+                    <option value="oklahoma">OK</option>
+                    <option value="oregon">OR</option>
+                    <option value="pennsylvania">PA</option>
+                    <option value="rhode-island">RI</option>
+                    <option value="south-carolina">SC</option>
+                    <option value="south-dakota">SD</option>
+                    <option value="tennessee">TN</option>
+                    <option value="texas">TX</option>
+                    <option value="utah">UT</option>
+                    <option value="vermont">VT</option>
+                    <option value="virginia">VA</option>
+                    <option value="washington">WA</option>
+                    <option value="wisconsin">WI</option>
+                    <option value="west-virginia">WV</option>
+                    <option value="wyoming">WY</option>
+                </select>
+                <button id="submitBtn" class="submit-btn" name="cityEntry" type="submit">Submit</button>
+            </form>
+        </section>
 
         <!--area to hold generate results-->
-        <div id="results-container">
-            <!--holds entered zip code-->
-            <div id="zipCode"></div>
-            <!--holds dynamically generated job postings-->
-            <div id="jobList"></div>
-
+        <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    <li class="glide__slide">0</li>
+                    <li class="glide__slide">1</li>
+                    <li class="glide__slide">2</li>
+                    <li class="glide__slide">3</li>
+                    <li class="glide__slide">4</li>
+                    <li class="glide__slide">5</li>
+                    <li class="glide__slide">6</li>
+                    <li class="glide__slide">7</li>
+                    <li class="glide__slide">8</li>
+                </ul>
+            </div>
+            <div data-glide-el="controls">
+                <button class="arrow_button" data-glide-dir="<">Previous</button>
+                <button class="arrow_button" data-glide-dir=">">Next</button>
+            </div>
         </div>
+    </div>
 
+
+    <section id="jobList">
+        <div id='map' class='map'></div>
     </section>
+
     <section id="storage">
         <!--use this area to store saved search results-->
     </section>
-    
-
+    <!--link to js file for petfinder-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@petfinder/petfinder-js/dist/petfinder.min.js"></script>
+    <!--handle the glide function-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+    <!--tomtom js library-->
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.59.1/maps/maps-web.min.js"></script>
+    <script
+        src="https://api.tomtom.com/maps-sdk-for-web/5.x/5.59.1//examples/pages/examples/assets/js/mobile-or-tablet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>
