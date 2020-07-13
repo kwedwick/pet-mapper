@@ -3,9 +3,14 @@ var city = $('#cityEntry').val().trim();
 var state = $('#stateDropDown').val();
 
 
+var k = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ";
+var s = "X3V0uoa86gU6JJzRLbv9rVWqDk3hCXukTcxCmpZr"
+
+// curl -d "grant_type=client_credentials&client_id=d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ&client_secret=X3V0uoa86gU6JJzRLbv9rVWqDk3hCXukTcxCmpZr" https://api.petfinder.com/v2/oauth2/token
+
 // function that retrieves jobs that meet avg and location
 //from indeed
-var getJobs = function() {
+var getPetfinderResults = function() {
 
     //test to see what values are being sent here
     console.log(city);
