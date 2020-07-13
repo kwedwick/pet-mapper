@@ -8,29 +8,81 @@
     --secondary: white;
     --tertiary: black;
 }
-
+body {
+    font-family: 'Poppins', sans-serif;
+}
 header {
     text-align: center;
-    background-color: var(--primary);
+    background-image: linear-gradient(to right, var(--primary), rgb(34, 119, 71));
     color: var(--secondary);
 }
 header h1 {
-    font-size: 3em;
+    font-size: 3.5em;
 }
 header p {
-    font-size: 2vh;
+    font-size: 2em;
 }
-
-
 
 .main-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    justify-content: center;
-    flex-wrap: wrap;
+    margin: 50px;  
 }
 
+.search-wrapper {
+    border: 3px solid var(--tertiary);
+    padding: 30px;
+    width: fit-content;
+    background-color: var(--primary);
+}
+
+.search-wrapper h2 {
+    color: var(--secondary);
+    font-size: 2em;
+}
+.search-wrapper span {
+    color: var(--secondary);
+}
+
+.city-input {
+    display: block;
+    width: 100%;
+    font-size: 1.2vw;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    border: 1px solid var(--primary);
+}
+.submit-btn {
+    background: var(--secondary);
+    border: none;
+    text-align: center;
+    border-radius: 10px;
+    color: var(--primary);
+    font-size: 22px;
+    outline: none;
+    margin-right: 15px;
+    padding: 5px;
+}
+
+.glide li{
+    height: 100px;
+    font-size: 100px;
+}
+
+.arrow_button {
+    background: var(--primary);
+    border: none;
+    text-align: center;
+    border-radius: 10px;
+    color: var(--secondary);
+    font-size: 22px;
+    outline: none;
+    margin-right: 15px;
+    padding: 10px;
+}
+
+
+.map {
+    height: 500px;
+}
 .marker-icon {
     background-position: center;
     background-size: 22px 22px;

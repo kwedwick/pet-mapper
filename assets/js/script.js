@@ -143,5 +143,14 @@ createMarker('accident.colors-white.jpg', [-78.17043537427266, 36.31817544230164
 
 
 
+
+//creating JS for carousel 
+new Glide('.glide', {
+    type: 'carousel',
+    startAt: 0,
+    perView: 3
+  }).mount()
+
+
 // when user clicks submit btn, runs function for everything
 submitBtn.addEventListener("click", submitCity);
