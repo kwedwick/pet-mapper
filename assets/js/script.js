@@ -3,9 +3,11 @@ var city = $('#cityEntry').val().trim();
 var state = $('#stateDropDown').val();
 
 
+
+
 // function that retrieves jobs that meet avg and location
 //from indeed
-var getJobs = function() {
+var getPetfinderResults = function() {
 
     //test to see what values are being sent here
     console.log(city);
@@ -137,8 +139,17 @@ function createMarker(icon, position, color, popupText) {
 }
 createMarker('accident.colors-white.svg', [-120.72217631449985, 42.73919549715691], '#5327c3', 'SVG icon');
 createMarker('accident.colors-white.png', [-99.98580752275456, 33.43211082128627], '#c30b82', 'PNG icon');
-createMarker('accident.colors-white.jpg', [43.0731, 89.4012], '#c31a26', 'JPG icon');
+createMarker('accident.colors-white.jpg', [-78.17043537427266, 36.31817544230164], '#c31a26', 'JPG icon');
 
+
+
+
+//creating JS for carousel 
+new Glide('.glide', {
+    type: 'carousel',
+    startAt: 0,
+    perView: 3
+  }).mount()
 
 
 // when user clicks submit btn, runs function for everything
