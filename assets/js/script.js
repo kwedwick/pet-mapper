@@ -104,6 +104,7 @@ var getWageInfo = function(state) {
     
 };
 
+
 //Adding TomTom Stuff
 
 // Define your product name and version.
@@ -128,7 +129,7 @@ function createMarker(icon, position, color, popupText) {
     var iconElement = document.createElement('div');
     iconElement.className = 'marker-icon';
     iconElement.style.backgroundImage =
-        'url(https://api.tomtom.com/maps-sdk-for-web/5.x/assets/images/' + icon + ')';
+        'url(/Users/nicole.porter/Desktop/projects/wage-cost-comparison/assets/css/images/' + icon + ')';
     markerContentElement.appendChild(iconElement);
     var popup = new tt.Popup({offset: 30}).setText(popupText);
     // add marker to map
@@ -137,11 +138,18 @@ function createMarker(icon, position, color, popupText) {
         .setPopup(popup)
         .addTo(map);
 }
-createMarker('accident.colors-white.svg', [-120.72217631449985, 42.73919549715691], '#5327c3', 'SVG icon');
-createMarker('accident.colors-white.png', [-99.98580752275456, 33.43211082128627], '#c30b82', 'PNG icon');
-createMarker('accident.colors-white.jpg', [-78.17043537427266, 36.31817544230164], '#c31a26', 'JPG icon');
+createMarker('sparrow-bird.svg', [-120.72217631449985, 42.73919549715691], '#5327c3', 'Name of Bird');
+createMarker('cat-animal.svg', [-99.98580752275456, 33.43211082128627], '#c30b82', 'Name of cat');
+createMarker('dog.svg', [-78.17043537427266, 36.31817544230164], '#c31a26', 'Name of Dog');
 
-
+//for loop to cycle through result
+var arrayForResults = ['Pet A', 'Pet B'];
+var arrayLength = arrayForResults.length;
+for (var i = 0; i < arrayLength; i++) {
+    //createMarker()
+    console.log(arrayForResults[i]);
+    //Do something)
+};
 
 
 //creating JS for carousel 
