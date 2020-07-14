@@ -11,10 +11,13 @@
 body {
     font-family: 'Poppins', sans-serif;
 }
+
+/* header start */
 header {
     text-align: center;
     background-image: linear-gradient(to right, var(--primary), rgb(34, 119, 71));
     color: var(--secondary);
+    border-bottom: 3px solid black;
 }
 header h1 {
     font-size: 3.5em;
@@ -23,20 +26,33 @@ header p {
     font-size: 2em;
 }
 
+/* header end */
+/* search container start*/
+
 .main-container {
-    margin: 50px;  
+    margin: 50px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 20px;
 }
 
+.search-container {
+    margin: 20px;
+    display: grid;
+    grid-gap: 10px 0;
+
+}
 .search-wrapper {
     border: 3px solid var(--tertiary);
-    padding: 30px;
-    width: fit-content;
     background-color: var(--primary);
+    padding: 10px;
+    display: block;
 }
 
 .search-wrapper h2 {
     color: var(--secondary);
     font-size: 2em;
+    text-align: center;
 }
 .search-wrapper span {
     color: var(--secondary);
@@ -58,13 +74,35 @@ header p {
     color: var(--primary);
     font-size: 22px;
     outline: none;
-    margin-right: 15px;
     padding: 5px;
 }
 
-.glide li{
-    height: 100px;
-    font-size: 100px;
+.submit-btn:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+.search-results {
+    border: 3px solid black;
+    background-color: var(--primary);
+}
+
+.search-results h2 {
+    color: var(--secondary);
+    font-size: 2em;
+    text-align: center;
+}
+
+/* search container end */
+/* Glide carousel start */
+
+.glide {
+    margin: 50px;
+    width: 100%;
+}
+.glide__slide{
+    height: 300px;
+    font-size: 2em;
 }
 
 .arrow_button {
@@ -79,9 +117,19 @@ header p {
     padding: 10px;
 }
 
+.arrow_button:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+    border: 3px solid var(--primary);
+    font-size: bold;
+}
+
+/* Glide carousel end */
+/* map start */
 
 .map {
     height: 500px;
+    border: 3px solid black;
 }
 .marker-icon {
     background-position: center;
@@ -120,6 +168,4 @@ header p {
     width: 24px;
 }
 
-html {
-    height:100%;
-}
+/* map end */
