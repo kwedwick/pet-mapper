@@ -146,9 +146,8 @@ createMarker('dog.svg', [-78.17043537427266, 36.31817544230164], '#c31a26', 'Nam
 var arrayForResults = ['Pet A', 'Pet B'];
 var arrayLength = arrayForResults.length;
 for (var i = 0; i < arrayLength; i++) {
-    //createMarker()
+    createMarker(icon, position, color, popupText);
     console.log(arrayForResults[i]);
-    //Do something)
 };
 
 
