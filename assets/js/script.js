@@ -1,6 +1,6 @@
 submitBtn = document.getElementById("submitBtn");
-var city = $('#cityEntry').val().trim();
-var state = $('#stateDropDown').val();
+var cardContainerEl = document.getElementById("cardContainer");
+
 
 
 
@@ -14,13 +14,13 @@ var getPetfinderResults = function (animal, city, state) {
     //test to see what values are being sent here
 
     var key = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ"
-    var secret = "tR9LMFUA157fS4G2xAJYqCbGPjiGM7tw0Qi15sIc"
+    var secret = ""
 
 
     // set up api call to indeed.com using city and state 
     //from input
     fetch("https://api.petfinder.com/v2/oauth2/token", {
-        body: "grant_type=client_credentials&client_id=d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ&client_secret=tR9LMFUA157fS4G2xAJYqCbGPjiGM7tw0Qi15sIc",
+        body: "grant_type=client_credentials&client_id=" + key + "&client_secret=" + secret,
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
@@ -39,7 +39,8 @@ var getPetfinderResults = function (animal, city, state) {
         }).then(function (response) {
             return response.json();
         }).then(function (data) {
-            console.log(data);
+            //console.log(data);
+            createAnimalCards(data.animals)
         })
     })
 
@@ -66,8 +67,6 @@ var getPetfinderResults = function (animal, city, state) {
 
     // if the city and state return does not exist, tell user
     //to try again
-
-
 };
 
 
@@ -102,6 +101,30 @@ var submitFormHandler = function (event) {
     // document.getElementById("resultsContainer").appendChild(location);
 
 };
+
+
+function createAnimalCards(animals) {
+    $('#cardContainer').empty();
+
+    var animalArray = animals
+    for (var i = 0; i <animalArray.length; i++) {
+        var animalCardEl = document.createElement("li");
+        $(animalCardEl).addClass("glide__slide");
+
+        var animalNameEl = document.createElement("h3");
+        animalNameEl.innerHTML = animalArray[i].name;
+        animalCardEl.appendChild(animalNameEl);
+        console.log(animalArray[i].name)
+
+        cardContainerEl.appendChild(animalCardEl);
+        
+    }
+    new Glide('.glide', {
+        type: 'carousel',
+        startAt: 0,
+        perView: 3
+    }).mount()
+}
 
 //Adding TomTom Stuff
 
@@ -158,12 +181,12 @@ new Glide('.glide', {
 
 
 
-//creating JS for carousel 
-new Glide('.glide', {
-    type: 'carousel',
-    startAt: 0,
-    perView: 3
-}).mount()
+//creating JS for carousel - disabling for now
+// new Glide('.glide', {
+//     type: 'carousel',
+//     startAt: 0,
+//     perView: 3
+// }).mount()
 
 
 // when user clicks submit btn, runs function for everything
