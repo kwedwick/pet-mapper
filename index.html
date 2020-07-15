@@ -35,7 +35,7 @@
             <form id="searchBar" class="search-container">
                 <h2>Let's find a pet!</h2>
                 <label for="animal"><span>Choose a Pet:</span></label>
-                <select id="animalDropDown">
+                <select id="animalDropDown" class="drop-down-input">
                     <option value="dog">Dog</option>
                     <option value="cat">Cat</option>
                     <option value="bird">Bird</option>
@@ -105,13 +105,17 @@
             <ul id="searchListContainer" class="search-list-container"></ul>
         </section>
     </div>
-        <!--area to hold generate results-->
+    <!--area to hold generate results-->
+    <div class="glider-container">
+        <h2>
+            Pets In This Area
+        </h2>
         <div class="glide">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
                     <li class="glide__slide">
                         <div>
-                            <h2>Chloe</h2>
+                            <h3>Chloe</h3>
                         </div>
                     </li>
                     <li class="glide__slide">1</li>
@@ -124,22 +128,24 @@
                     <li class="glide__slide">8</li>
                 </ul>
             </div>
-            <div data-glide-el="controls">
+            <div class="arrow-container" data-glide-el="controls">
                 <button class="arrow_button" data-glide-dir="<">Previous</button>
                 <button class="arrow_button" data-glide-dir=">">Next</button>
             </div>
         </div>
+    </div>
 
 
-
-    <section id="map-container"></section>
+    <section id="mapContainer" class="map-container">
+        <h2>Mapp Finder</h2>
         <div id='map' class='map'></div>
     </section>
 
-    <footer>
+    <footer class="footer">
         <h3>Pet Mapper 2020</h3>
+        <p>Search powered by Petfinder</p>
     </footer>
-    
+
     <!--handle the glide function-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
     <!--tomtom js library-->
