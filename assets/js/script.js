@@ -7,57 +7,85 @@ var state = $('#stateDropDown').val();
 
 // function that retrieves jobs that meet avg and location
 //from indeed
-var getPetfinderResults = function() {
+var getPetfinderResults = function (animal, city, state) {
 
-    //test to see what values are being sent here
-    console.log(city);
     console.log(state);
 
+    //test to see what values are being sent here
+
+    var key = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ"
+    var secret = "tR9LMFUA157fS4G2xAJYqCbGPjiGM7tw0Qi15sIc"
 
 
     // set up api call to indeed.com using city and state 
     //from input
-    // jobUrl = "https://api.indeed.com/ads/apisearch?publisher=123412341234123&l=" + city + "%2C+" + state + "&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2";
-    
+    fetch("https://api.petfinder.com/v2/oauth2/token", {
+        body: "grant_type=client_credentials&client_id=d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ&client_secret=tR9LMFUA157fS4G2xAJYqCbGPjiGM7tw0Qi15sIc",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST"
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        var token = data.access_token
+        console.log(data);
+        var proxyUrl = "https://cors-anywhere.herokuapp.com/"
+        var endPoint = "https://api.petfinder.com/v2/animals?type=" + animal + "&location=" + city + ", " + state;
+        fetch(proxyUrl + endPoint, {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log(data);
+        })
+    })
+
+
+
     // console.log(response);
 
     // create a new div to hold each job posting result returned
-    var jobPost = document.createElement("div");
-    jobPost.innerHTML = "aspects we decide to pull from each post";
-    jobPost.classList = "job-post";
-    jobPost.id = "jobPost"
-    document.getElementById("jobList").appendChild(jobPost);
+    // var jobPost = document.createElement("div");
+    // jobPost.innerHTML = "aspects we decide to pull from each post";
+    // jobPost.classList = "job-post";
+    // jobPost.id = "jobPost"
+    // document.getElementById("jobList").appendChild(jobPost);
 
-    // create save button on the dynamically created job post
-    var saveJob = document.createElement("btn");
-    saveJob.innerHTML = "Save Job";
-    saveJob.classList = "save-btn";
-    saveJob.id = "save"
-    document.getElementById("jobPost").appendChild(saveJob);
-    
+    // // create save button on the dynamically created job post
+    // var saveJob = document.createElement("btn");
+    // saveJob.innerHTML = "Save Job";
+    // saveJob.classList = "save-btn";
+    // saveJob.id = "save"
+    // document.getElementById("jobPost").appendChild(saveJob);
+
 
 
 
     // if the city and state return does not exist, tell user
     //to try again
 
-    
+
 };
 
 
 // function that captures input city and state
-var submitCity = function(event) {
+var submitFormHandler = function (event) {
+    event.preventDefault();
     // capture text entered for city
-    var city = $('#cityEntry').val().trim();
+    var animal = $('#animalDropDown').val().toLowerCase();
+    var city = $('#cityEntry').val().trim().toLowerCase();
     // send city to api call
-    
-   // capture text entered for state
+
+    // capture text entered for state
     var state = $('#stateDropDown').val().toLowerCase();
     // send state to api call
-    getWageInfo(state);
+    getPetfinderResults(animal, city, state);
 
     // if city and state entered
-    if (city){
+    if (city) {
         console.log(city);
         cityEntry.value = "";
 
@@ -68,40 +96,11 @@ var submitCity = function(event) {
     }
 
     // create title divs for city and state
-    var location = document.createElement("h1");
-    location.innerHTML = city + ", " + state;
-    location.classList = "location-title";
-    document.getElementById("resultsContainer").appendChild(location);
+    // var location = document.createElement("h1");
+    // location.innerHTML = city + ", " + state;
+    // location.classList = "location-title";
+    // document.getElementById("resultsContainer").appendChild(location);
 
-};
-
-// function to use retrieve state avg income from bls.gov api
-var getWageInfo = function(state) {
-    // establish URL for api to return average income from bls.gov
-    wageDataUrl = "	https://api.bls.gov/publicAPI/v2/timeseries/data/";
-    
-    // pass URL to fetch
-    fetch(wageDataUrl)
-    // handling the data
-    .then(function(response){
-        // return the average income value 
-        response = "returned income avg value from the api";
-
-        //test to see what value is returning
-        console.log(response);
-
-        // dynamically create new div to display the avg 
-        var avBox = document.createElement("div");
-        avBox.innerHTML = (response);
-        avBox.classList = "avg-card";
-        document.getElementById("resultsContainer").appendChild(avBox);
-
-        // sends the averag information to Indeed
-        getJobs();
-
-
-    })
-    
 };
 
 //Adding TomTom Stuff
@@ -130,9 +129,9 @@ function createMarker(icon, position, color, popupText) {
     iconElement.style.backgroundImage =
         'url(https://api.tomtom.com/maps-sdk-for-web/5.x/assets/images/' + icon + ')';
     markerContentElement.appendChild(iconElement);
-    var popup = new tt.Popup({offset: 30}).setText(popupText);
+    var popup = new tt.Popup({ offset: 30 }).setText(popupText);
     // add marker to map
-    new tt.Marker({element: markerElement, anchor: 'bottom'})
+    new tt.Marker({ element: markerElement, anchor: 'bottom' })
         .setLngLat(position)
         .setPopup(popup)
         .addTo(map);
@@ -149,8 +148,8 @@ new Glide('.glide', {
     type: 'carousel',
     startAt: 0,
     perView: 3
-  }).mount()
+}).mount()
 
 
 // when user clicks submit btn, runs function for everything
-submitBtn.addEventListener("click", submitCity);
+submitBtn.addEventListener("click", submitFormHandler);
