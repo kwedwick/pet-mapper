@@ -2,9 +2,6 @@ submitBtn = document.getElementById("submitBtn");
 var cardContainerEl = document.getElementById("cardContainer");
 
 
-
-
-
 // function that retrieves jobs that meet avg and location
 //from indeed
 var getPetfinderResults = function (animal, city, state) {
@@ -46,27 +43,7 @@ var getPetfinderResults = function (animal, city, state) {
 
 
 
-    // console.log(response);
-
-    // create a new div to hold each job posting result returned
-    // var jobPost = document.createElement("div");
-    // jobPost.innerHTML = "aspects we decide to pull from each post";
-    // jobPost.classList = "job-post";
-    // jobPost.id = "jobPost"
-    // document.getElementById("jobList").appendChild(jobPost);
-
-    // // create save button on the dynamically created job post
-    // var saveJob = document.createElement("btn");
-    // saveJob.innerHTML = "Save Job";
-    // saveJob.classList = "save-btn";
-    // saveJob.id = "save"
-    // document.getElementById("jobPost").appendChild(saveJob);
-
-
-
-
-    // if the city and state return does not exist, tell user
-    //to try again
+    
 };
 
 
@@ -114,7 +91,22 @@ function createAnimalCards(animals) {
         var animalNameEl = document.createElement("h3");
         animalNameEl.innerHTML = animalArray[i].name;
         animalCardEl.appendChild(animalNameEl);
-        console.log(animalArray[i].name)
+        console.log(animalArray[i].name);
+
+        var animalLocationEl = document.createElement("h4");
+        animalLocationEl.innerHTMl = animalArray[i].location;
+        animalCardEl.appendChild(animalLocationEl);
+        console.log(animalArray[i].location);
+
+        var animalBreedEl = document.createElement("h5");
+        animalBreedEl.innerHTML = animalArray[i].breed;
+        animalCardEl.appendChild(animalBreedEl);
+        console.log(animalArray[i].breed);
+
+        var animalOrgLocationEl = document.createElement("h5");
+        animalOrgLocationEl.innerHTML = animalArray[i].organization;
+        animalCardEl.appendChild(animalOrgLocationEL);
+        console.log(animalArray[i].organization);
 
         cardContainerEl.appendChild(animalCardEl);
         
