@@ -42,6 +42,7 @@ var getPetfinderResults = function (animal, city, state) {
             
         }).then(function (data) {
             createAnimalCards(data.animals)
+            getAddress(data.animals)
         })
     })
 };
@@ -71,7 +72,6 @@ var submitFormHandler = function (event) {
     // document.getElementById("resultsContainer").appendChild(location);
 
 };
-
 
 function createAnimalCards(animals) {
     $('#cardContainer').empty(); //clearing previous cards
@@ -191,9 +191,40 @@ function createMarker(icon, position, color, popupText) {
         .setPopup(popup)
         .addTo(map);
 }
-createMarker('accident.colors-white.svg', [-120.72217631449985, 42.73919549715691], '#5327c3', 'SVG icon');
-createMarker('accident.colors-white.png', [-99.98580752275456, 33.43211082128627], '#c30b82', 'PNG icon');
-createMarker('accident.colors-white.jpg', [-78.17043537427266, 36.31817544230164], '#c31a26', 'JPG icon');
+
+// get data to put on the map
+function getAddress(animals) {
+    var animalArray = animals
+    for (var i = 0; i <animalArray.length; i++) { 
+        //get address
+        var animalStreetAddress = animalArray[i].contact.address.address1;
+        //make sure address isn't null
+        if (!animalStreetAddress) {
+            continue;
+        }
+        //get city
+        var animalCity = animalArray[i].contact.address.city;
+        //get state
+        var animalState = animalArray[i].contact.address.state;
+         //convert animalStreetAddress to fetch request format
+        var splitAnimalStreetAddressArray = animalStreetAddress.split(" ");
+        animalStreetAddress = splitAnimalStreetAddressArray.join("%20");
+        var fetchAddress = animalStreetAddress + animalCity + '%20' + animalState;
+        console.log(fetchAddress);
+         //convert address to lat and long
+    var tomKey = 'ejoYhQhApDJfoTII6fG63l3BXF0tiaUV'
+    fetch('https://api.tomtom.com/search/2/geocode/' + fetchAddress + '.json?key=' + tomKey 
+        ).then(function (response) {
+            return response.json();
+
+        }).then(function (data) {
+        console.log(data)
+        var lat = data.results[0].position.lat;
+        var lon = data.results[0].position.lon;
+        createMarker('accident.colors-white.svg', [lat, lon], '#5327c3', 'SVG icon');
+        })
+    }
+}
 
 
 
@@ -208,3 +239,4 @@ createMarker('accident.colors-white.jpg', [-78.17043537427266, 36.31817544230164
 
 // when user clicks submit btn, runs function for pet search
 submitBtn.addEventListener("click", submitFormHandler);
+
