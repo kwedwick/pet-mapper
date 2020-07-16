@@ -5,8 +5,8 @@ var cardContainerEl = document.getElementById("cardContainer");
 // function that retrieves jobs that meet avg and location
 //from indeed
 var getPetfinderResults = function (animal, city, state) {
-
-    console.log(state);
+    var error = document.getElementById("error")
+    error.innerHTML= "";
 
     //test to see what values are being sent here
 
@@ -34,16 +34,17 @@ var getPetfinderResults = function (animal, city, state) {
                 Authorization: "Bearer " + token
             }
         }).then(function (response) {
-            return response.json();
+            if (response.ok) {
+                return response.json();
+            } else {
+                error.innerHTML = "<span style='color: red;'>"+ 
+                " Please enter a valid City</span>"  
+            }
+            
         }).then(function (data) {
-            //console.log(data);
             createAnimalCards(data.animals)
         })
     })
-
-
-
-    
 };
 
 
@@ -52,7 +53,8 @@ var submitFormHandler = function (event) {
     event.preventDefault();
     // capture text entered for city
     var animal = $('#animalDropDown').val().toLowerCase();
-    var city = $('#cityEntry').val().trim().toLowerCase();
+    var city = $('#cityEntry').val().trim().toLowerCase() //.split(" ").join("");
+    console.log(city);
     // send city to api call
 
     // capture text entered for state
@@ -68,7 +70,8 @@ var submitFormHandler = function (event) {
         // if entry field is left blank or if the city 
     } else {
         //need another option; she said no alerts
-        alert("Please choose a city");
+        error.innerHTML = "<span style='color: red;'>"+ 
+                " Please enter a valid City</span>"  
     }
 
     // create title divs for city and state
@@ -84,6 +87,8 @@ function createAnimalCards(animals) {
     $('#cardContainer').empty();
 
     var animalArray = animals
+    console.log(animalArray)
+
     for (var i = 0; i <animalArray.length; i++) {
         var animalCardEl = document.createElement("li");
         $(animalCardEl).addClass("glide__slide");
@@ -91,23 +96,38 @@ function createAnimalCards(animals) {
         var animalNameEl = document.createElement("h3");
         animalNameEl.innerHTML = animalArray[i].name;
         animalCardEl.appendChild(animalNameEl);
-        console.log(animalArray[i].name);
 
-        var animalLocationEl = document.createElement("h4");
-        animalLocationEl.innerHTMl = animalArray[i].location;
+        if (animalArray[i].primary_photo_cropped === null) {
+
+        var animalImgEl = document.createElement("p");
+        animalImgEl.innerHTML = "No Photo Available"
+        animalCardEl.appendChild(animalImgEl);
+
+        } else if (animalArray[i].primary_photo_cropped !== null) {
+
+        var animalImgEl = document.createElement("img");
+        var animalPhoto = animalArray[i].primary_photo_cropped.small
+        animalImgEl.setAttribute("src", animalPhoto)
+        $(animalImgEl).addClass("animal-photo")
+        animalCardEl.appendChild(animalImgEl);
+        }
+    
+
+        var animalLocationEl = document.createElement("p");
+        animalLocationEl.innerHTML = "Location: " + animalArray[i].contact.address.city + ", " + animalArray[i].contact.address.state;
         animalCardEl.appendChild(animalLocationEl);
-        console.log(animalArray[i].location);
+        
 
-        var animalBreedEl = document.createElement("h5");
-        animalBreedEl.innerHTML = animalArray[i].breed;
+        var animalBreedEl = document.createElement("p");
+        animalBreedEl.innerHTML = "Primary Breed: " + animalArray[i].breeds.primary;
         animalCardEl.appendChild(animalBreedEl);
-        console.log(animalArray[i].breed);
+        
 
-        var animalOrgLocationEl = document.createElement("h5");
+        var animalOrgLocationEl = document.createElement("p");
         animalOrgLocationEl.innerHTML = animalArray[i].organization;
-        animalCardEl.appendChild(animalOrgLocationEL);
-        console.log(animalArray[i].organization);
-
+        animalCardEl.appendChild(animalOrgLocationEl);
+       
+        //appending card to carousel
         cardContainerEl.appendChild(animalCardEl);
         
     }

@@ -6,9 +6,10 @@
 
 :root {
     --primary: rgb(11, 68, 49);
-    --secondary: white;
+    --secondary: rgb(235, 240, 245);
     --tertiary: black;
     --hover: rgb(34, 119, 71);
+    --boxshadow: grey;
 }
 html {
     height: 100%;
@@ -19,19 +20,49 @@ body {
 
 /* header start */
 header {
-    text-align: center;
+    text-align: left;
     background-image: linear-gradient(to right, var(--primary), rgb(34, 119, 71));
     color: var(--secondary);
     border-bottom: 3px solid black;
+    padding: 10px;
 }
 header h1 {
     font-size: 3.5em;
+    margin-bottom: 0;
 }
 header p {
     font-size: 2em;
 }
 
 /* header end */
+/* hero img */
+.hero {
+    background-image: url("../imgs/hero-img.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-attachment: fixed;
+    height: 600px;
+}
+
+.about-us-hero {
+    background-color: rgba(248, 248, 248, 0.3);
+    padding: 20px;
+    margin-right: 50px;
+    padding: 10px;
+    box-shadow: 5px 5px 5px var(--boxshadow);
+}
+
+.about-us-hero h2 {
+    font-size: 2.2em;
+    font-style: italic;
+}
+
+.about-us-hero p {
+    font-weight: bold;
+}
 
 /* search container start*/
 
@@ -56,6 +87,7 @@ header p {
     padding: 10px;
     display: block;
     border-radius: 10px;
+    box-shadow: 5px 5px 5px var(--boxshadow);
 }
 
 .search-wrapper h2 {
@@ -93,7 +125,7 @@ header p {
 
 .submit-btn:hover {
     background-color: var(--hover);
-    color: white;
+    color: var(--secondary);
 }
 
 .search-results {
@@ -126,12 +158,28 @@ header p {
 }
 
 .glide__slide{
-    height: 300px;
-    font-size: 2em;
+    height: 500px;
+    font-size: 1.2em;
     background-color: var(--secondary);
-    border: 3px solid black;
     text-align: center;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px black;
 }
+
+.glide__slide h3 {
+    font-size: 1.4em;
+    font-style: oblique;
+}
+
+.glide__slide p {
+    margin-bottom: 0;
+}
+
+.animal-photo {
+    height: 150px;
+    width: 150px;
+}
+
 .arrow-container {
     display: flex;
     justify-content: space-evenly;
@@ -144,13 +192,13 @@ header p {
     color: var(--primary);
     font-size: 22px;
     outline: none;
-    padding: 10px;
+    padding: 10px 10px 3px 10px;
     margin-bottom: 10px;
 }
 
 .arrow_button:hover {
     border: 3px solid var(--primary);
-    padding: 7px;
+    padding: 7px 7px 0px 7px;
 }
 
 /* Glide carousel end */
@@ -159,7 +207,6 @@ header p {
 .map-container {
     display: grid;
     justify-content: center;
-    background: radial-gradient(var(--primary), var(--hover));
     margin: 20px 50px;
     padding-top: 20px;
     padding-bottom: 40px;
@@ -171,7 +218,7 @@ header p {
     text-align: center;
     margin: 0;
     padding-bottom: 20px;
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 .map {
