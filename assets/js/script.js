@@ -11,7 +11,7 @@ var getPetfinderResults = function (animal, city, state) {
     //test to see what values are being sent here
 
     var key = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ"
-    var secret = ""
+    var secret = "P4K1rCZ7k7dUDnwq2idKpeAqmMEEJ3tIkzywVyFj"
 
 
     // set up api call to indeed.com using city and state 
@@ -121,11 +121,33 @@ function createAnimalCards(animals) {
         var animalBreedEl = document.createElement("p");
         animalBreedEl.innerHTML = "Primary Breed: " + animalArray[i].breeds.primary;
         animalCardEl.appendChild(animalBreedEl);
-        
 
-        var animalOrgLocationEl = document.createElement("p");
-        animalOrgLocationEl.innerHTML = animalArray[i].organization;
-        animalCardEl.appendChild(animalOrgLocationEl);
+        var animalGenderEl = document.createElement("p");
+        animalGenderEl.innerHTML = "Gender: " + animalArray[i].gender;
+        animalCardEl.appendChild(animalGenderEl);
+        
+        var emailAddressEl = document.createElement("p");
+        var emailLink = document.createElement("a");
+        var email = animalArray[i].contact.email
+        //console.log(email)
+        emailAddressEl.innerHTML = "Email: ";
+        emailLink.innerHTML = email;
+        emailLink.setAttribute("href", "mailto:" + email);
+        emailAddressEl.appendChild(emailLink);
+        animalCardEl.appendChild(emailAddressEl);
+
+        var petPetfinderUrlEl = document.createElement("a");
+        //var petUrlLink = document.createElement("a")
+        var petPageLink = animalArray[i].url;
+        petPetfinderUrlEl.innerHTML = "Click to see more!";
+        petPetfinderUrlEl.setAttribute("src", petPageLink);
+        petPetfinderUrlEl.setAttribute("target", "_blank")
+        petPetfinderUrlEl.setAttribute("href", petPageLink);
+        animalCardEl.appendChild(petPetfinderUrlEl);
+
+        // var animalOrgLocationEl = document.createElement("p");
+        // animalOrgLocationEl.innerHTML = animalArray[i].organization;
+        // animalCardEl.appendChild(animalOrgLocationEl);
        
         //appending card to carousel
         cardContainerEl.appendChild(animalCardEl);
@@ -134,7 +156,7 @@ function createAnimalCards(animals) {
     new Glide('.glide', {
         type: 'carousel',
         startAt: 0,
-        perView: 3
+        perView: 4
     }).mount()
 }
 
