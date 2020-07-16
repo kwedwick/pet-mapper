@@ -2,8 +2,8 @@
 
 To easily and quickly display nearby pets and display them on a map
 
-Github Repo: https://github.com/londonlast21/wage-cost-comparison
-Live URL: 
+Github Repo: https://github.com/kwedwick/pet-mapper
+Live URL: https://kwedwick.github.io/pet-mapper/
 
 ## Table of Contents
 
