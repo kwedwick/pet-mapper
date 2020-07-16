@@ -15,7 +15,7 @@ Live URL:
 ## Final Product
 
 Here is the screenshot of the main page
-![Image of completed webpage](assets\imgs\final-screenshot.jpg)
+![Image of completed webpage](assets/imgs/final-screenshot.jpg)
 
 Currently using Petfinder API to display nearby results. In the future will look to expand to incorporating other adoption APIs
 
