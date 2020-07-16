@@ -9,12 +9,12 @@ var cardContainerEl = document.getElementById("cardContainer");
 //from indeed
 var getPetfinderResults = function (animal, city, state) {
 
-    //console.log(state);
+    console.log(state);
 
     //test to see what values are being sent here
 
     var key = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ"
-    var secret = "P4K1rCZ7k7dUDnwq2idKpeAqmMEEJ3tIkzywVyFj"
+    var secret = ""
 
 
     // set up api call to indeed.com using city and state 
@@ -29,7 +29,7 @@ var getPetfinderResults = function (animal, city, state) {
         return response.json();
     }).then(function (data) {
         var token = data.access_token
-       // console.log(data);
+        console.log(data);
         var proxyUrl = "https://cors-anywhere.herokuapp.com/"
         var endPoint = "https://api.petfinder.com/v2/animals?type=" + animal + "&location=" + city + ", " + state;
         fetch(proxyUrl + endPoint, {
@@ -43,30 +43,6 @@ var getPetfinderResults = function (animal, city, state) {
             createAnimalCards(data.animals)
         })
     })
-
-
-
-    // console.log(response);
-
-    // create a new div to hold each job posting result returned
-    // var jobPost = document.createElement("div");
-    // jobPost.innerHTML = "aspects we decide to pull from each post";
-    // jobPost.classList = "job-post";
-    // jobPost.id = "jobPost"
-    // document.getElementById("jobList").appendChild(jobPost);
-
-    // // create save button on the dynamically created job post
-    // var saveJob = document.createElement("btn");
-    // saveJob.innerHTML = "Save Job";
-    // saveJob.classList = "save-btn";
-    // saveJob.id = "save"
-    // document.getElementById("jobPost").appendChild(saveJob);
-
-
-
-
-    // if the city and state return does not exist, tell user
-    //to try again
 };
 
 
@@ -85,7 +61,7 @@ var submitFormHandler = function (event) {
 
     // if city and state entered
     if (city) {
-        //console.log(city);
+        console.log(city);
         cityEntry.value = "";
 
         // if entry field is left blank or if the city 
@@ -114,43 +90,10 @@ function createAnimalCards(animals) {
         var animalNameEl = document.createElement("h3");
         animalNameEl.innerHTML = animalArray[i].name;
         animalCardEl.appendChild(animalNameEl);
-        //console.log(animalArray[i].name);
+        console.log(animalArray[i].name)
 
-        //grab address
-        var animalStreetAddress = animalArray[i].contact.address.address1;
-        //make sure address isn't null
-        if (!animalStreetAddress) {
-            continue;
-        } 
-        var animalCity = animalArray[i].contact.address.city;
-        var animalState = animalArray[i].contact.address.state;
-
-        //convert animalStreetAddress to fetch request format
-        var splitAnimalStreetAddressArray = animalStreetAddress.split(" ");
-        for (var i = 0; i <splitAnimalStreetAddressArray.length; i++) {
-            splitAnimalStreetAddressArray[i] = splitAnimalStreetAddressArray[i] + '%20'
-        };
-        animalStreetAddress =  splitAnimalStreetAddressArray.join("");
-
-        // create fetch address string
-        var fetchAddress = animalStreetAddress + animalCity + '%20' + animalState;
-        //console.log(fetchAddress);
+        cardContainerEl.appendChild(animalCardEl);
         
-        //convert address to lat and long
-        var convertAddress = function() {
-            var tomKey = 'ejoYhQhApDJfoTII6fG63l3BXF0tiaUV'
-            fetch('https://api.tomtom.com/search/2/geocode/' + fetchAddress + '.json?key=' + tomKey 
-        ).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            console.log(result.position.lat);
-            console.log(result.position.lon);
-            })
-        };
-
-        convertAddress();
-
-        cardContainerEl.appendChild(animalCardEl);                
     }
     new Glide('.glide', {
         type: 'carousel',
@@ -183,7 +126,7 @@ function createMarker(icon, position, color, popupText) {
     var iconElement = document.createElement('div');
     iconElement.className = 'marker-icon';
     iconElement.style.backgroundImage =
-        'url(/Users/nicole.porter/Desktop/projects/wage-cost-comparison/assets/css/images/' + icon + ')';
+        'url(https://api.tomtom.com/maps-sdk-for-web/5.x/assets/images/' + icon + ')';
     markerContentElement.appendChild(iconElement);
     var popup = new tt.Popup({ offset: 30 }).setText(popupText);
     // add marker to map
@@ -192,20 +135,21 @@ function createMarker(icon, position, color, popupText) {
         .setPopup(popup)
         .addTo(map);
 }
-createMarker('sparrow-bird.svg', [-120.72217631449985, 42.73919549715691], '#5327c3', 'Name of Bird');
-createMarker('cat-animal.svg', [-99.98580752275456, 33.43211082128627], '#c30b82', 'Name of cat');
-createMarker('dog.svg', [-78.17043537427266, 36.31817544230164], '#c31a26', 'Name of Dog');
-
-//for loop to create map marker through result
+createMarker('accident.colors-white.svg', [-120.72217631449985, 42.73919549715691], '#5327c3', 'SVG icon');
+createMarker('accident.colors-white.png', [-99.98580752275456, 33.43211082128627], '#c30b82', 'PNG icon');
+createMarker('accident.colors-white.jpg', [-78.17043537427266, 36.31817544230164], '#c31a26', 'JPG icon');
 
 
-//creating JS for carousel 
-new Glide('.glide', {
-    type: 'carousel',
-    startAt: 0,
-    perView: 3
-  }).mount()
+
+
+//creating JS for carousel - disabling for now
+// new Glide('.glide', {
+//     type: 'carousel',
+//     startAt: 0,
+//     perView: 3
+// }).mount()
 
 
 // when user clicks submit btn, runs function for everything
 submitBtn.addEventListener("click", submitFormHandler);
+
