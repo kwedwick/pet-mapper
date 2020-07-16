@@ -11,7 +11,7 @@ var getPetfinderResults = function (animal, city, state) {
     //test to see what values are being sent here
 
     var key = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ"
-    var secret = "P4K1rCZ7k7dUDnwq2idKpeAqmMEEJ3tIkzywVyFj"
+    var secret = ""
 
 
     // set up api call to indeed.com using city and state 
