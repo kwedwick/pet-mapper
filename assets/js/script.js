@@ -9,12 +9,12 @@ var cardContainerEl = document.getElementById("cardContainer");
 //from indeed
 var getPetfinderResults = function (animal, city, state) {
 
-    console.log(state);
+    //console.log(state);
 
     //test to see what values are being sent here
 
     var key = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ"
-    var secret = ""
+    var secret = "P4K1rCZ7k7dUDnwq2idKpeAqmMEEJ3tIkzywVyFj"
 
 
     // set up api call to indeed.com using city and state 
@@ -29,7 +29,7 @@ var getPetfinderResults = function (animal, city, state) {
         return response.json();
     }).then(function (data) {
         var token = data.access_token
-        console.log(data);
+       // console.log(data);
         var proxyUrl = "https://cors-anywhere.herokuapp.com/"
         var endPoint = "https://api.petfinder.com/v2/animals?type=" + animal + "&location=" + city + ", " + state;
         fetch(proxyUrl + endPoint, {
@@ -85,7 +85,7 @@ var submitFormHandler = function (event) {
 
     // if city and state entered
     if (city) {
-        console.log(city);
+        //console.log(city);
         cityEntry.value = "";
 
         // if entry field is left blank or if the city 
@@ -114,10 +114,43 @@ function createAnimalCards(animals) {
         var animalNameEl = document.createElement("h3");
         animalNameEl.innerHTML = animalArray[i].name;
         animalCardEl.appendChild(animalNameEl);
-        console.log(animalArray[i].name)
+        //console.log(animalArray[i].name);
 
-        cardContainerEl.appendChild(animalCardEl);
+        //grab address
+        var animalStreetAddress = animalArray[i].contact.address.address1;
+        //make sure address isn't null
+        if (!animalStreetAddress) {
+            continue;
+        } 
+        var animalCity = animalArray[i].contact.address.city;
+        var animalState = animalArray[i].contact.address.state;
+
+        //convert animalStreetAddress to fetch request format
+        var splitAnimalStreetAddressArray = animalStreetAddress.split(" ");
+        for (var i = 0; i <splitAnimalStreetAddressArray.length; i++) {
+            splitAnimalStreetAddressArray[i] = splitAnimalStreetAddressArray[i] + '%20'
+        };
+        animalStreetAddress =  splitAnimalStreetAddressArray.join("");
+
+        // create fetch address string
+        var fetchAddress = animalStreetAddress + animalCity + '%20' + animalState;
+        //console.log(fetchAddress);
         
+        //convert address to lat and long
+        var convertAddress = function() {
+            var tomKey = 'ejoYhQhApDJfoTII6fG63l3BXF0tiaUV'
+            fetch('https://api.tomtom.com/search/2/geocode/' + fetchAddress + '.json?key=' + tomKey 
+        ).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log(result.position.lat);
+            console.log(result.position.lon);
+            })
+        };
+
+        convertAddress();
+
+        cardContainerEl.appendChild(animalCardEl);                
     }
     new Glide('.glide', {
         type: 'carousel',
@@ -163,13 +196,7 @@ createMarker('sparrow-bird.svg', [-120.72217631449985, 42.73919549715691], '#532
 createMarker('cat-animal.svg', [-99.98580752275456, 33.43211082128627], '#c30b82', 'Name of cat');
 createMarker('dog.svg', [-78.17043537427266, 36.31817544230164], '#c31a26', 'Name of Dog');
 
-//for loop to cycle through result
-var arrayForResults = ['Pet A', 'Pet B'];
-var arrayLength = arrayForResults.length;
-for (var i = 0; i < arrayLength; i++) {
-    createMarker(icon, position, color, popupText);
-    console.log(arrayForResults[i]);
-};
+//for loop to create map marker through result
 
 
 //creating JS for carousel 
@@ -178,15 +205,6 @@ new Glide('.glide', {
     startAt: 0,
     perView: 3
   }).mount()
-
-
-
-//creating JS for carousel - disabling for now
-// new Glide('.glide', {
-//     type: 'carousel',
-//     startAt: 0,
-//     perView: 3
-// }).mount()
 
 
 // when user clicks submit btn, runs function for everything
