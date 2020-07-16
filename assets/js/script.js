@@ -10,8 +10,8 @@ var getPetfinderResults = function (animal, city, state) {
 
     //test to see what values are being sent here
 
-    var key = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ"
-    var secret = ""
+    var key = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ";
+    var secret = "";
 
 
     // set up api call to indeed.com using city and state 
@@ -26,7 +26,7 @@ var getPetfinderResults = function (animal, city, state) {
         return response.json();
     }).then(function (data) {
         var token = data.access_token
-        console.log(data);
+        //console.log(data);
         var proxyUrl = "https://cors-anywhere.herokuapp.com/"
         var endPoint = "https://api.petfinder.com/v2/animals?type=" + animal + "&location=" + city + ", " + state;
         fetch(proxyUrl + endPoint, {
@@ -37,8 +37,7 @@ var getPetfinderResults = function (animal, city, state) {
             if (response.ok) {
                 return response.json();
             } else {
-                error.innerHTML = "<span style='color: red;'>"+ 
-                " Please enter a valid City</span>"  
+                error.innerHTML = "<span style='color: red;'>" + " Please enter a valid City</span>"  
             }
             
         }).then(function (data) {
@@ -52,26 +51,17 @@ var getPetfinderResults = function (animal, city, state) {
 var submitFormHandler = function (event) {
     event.preventDefault();
     // capture text entered for city
-    var animal = $('#animalDropDown').val().toLowerCase();
-    var city = $('#cityEntry').val().trim().toLowerCase() //.split(" ").join("");
-    console.log(city);
-    // send city to api call
-
-    // capture text entered for state
-    var state = $('#stateDropDown').val().toLowerCase();
-    // send state to api call
-    getPetfinderResults(animal, city, state);
-
-    // if city and state entered
-    if (city) {
-        console.log(city);
+    var animal = $('#animalDropDown').val().toLowerCase();// capture animal
+    var city = $('#cityEntry').val().trim().toLowerCase() //.split(" ").join(""); capture city
+    var state = $('#stateDropDown').val().toLowerCase(); // capture state
+    
+    // send state to api call  
+    if (city) { // if city and state entered
         cityEntry.value = "";
-
-        // if entry field is left blank or if the city 
+        getPetfinderResults(animal, city, state);
     } else {
         //need another option; she said no alerts
-        error.innerHTML = "<span style='color: red;'>"+ 
-                " Please enter a valid City</span>"  
+        error.innerHTML = "<span style='color: red;'>" + " Please enter a valid City</span>"  
     }
 
     // create title divs for city and state
@@ -84,27 +74,30 @@ var submitFormHandler = function (event) {
 
 
 function createAnimalCards(animals) {
-    $('#cardContainer').empty();
+    $('#cardContainer').empty(); //clearing previous cards
 
-    var animalArray = animals
+    var animalArray = animals //creating array to hold animal data
     console.log(animalArray)
 
-    for (var i = 0; i <animalArray.length; i++) {
+    for (var i = 0; i <animalArray.length; i++) { // cycle through fetch array
+
+        //li element
         var animalCardEl = document.createElement("li");
         $(animalCardEl).addClass("glide__slide");
-
+        
+        //animal name
         var animalNameEl = document.createElement("h3");
         animalNameEl.innerHTML = animalArray[i].name;
         animalCardEl.appendChild(animalNameEl);
 
         if (animalArray[i].primary_photo_cropped === null) {
-
+        //no photo
         var animalImgEl = document.createElement("p");
         animalImgEl.innerHTML = "No Photo Available"
         animalCardEl.appendChild(animalImgEl);
 
         } else if (animalArray[i].primary_photo_cropped !== null) {
-
+        //append photo
         var animalImgEl = document.createElement("img");
         var animalPhoto = animalArray[i].primary_photo_cropped.small
         animalImgEl.setAttribute("src", animalPhoto)
@@ -112,20 +105,22 @@ function createAnimalCards(animals) {
         animalCardEl.appendChild(animalImgEl);
         }
     
-
+        //city, state
         var animalLocationEl = document.createElement("p");
         animalLocationEl.innerHTML = "Location: " + animalArray[i].contact.address.city + ", " + animalArray[i].contact.address.state;
         animalCardEl.appendChild(animalLocationEl);
         
-
+        //breed
         var animalBreedEl = document.createElement("p");
         animalBreedEl.innerHTML = "Primary Breed: " + animalArray[i].breeds.primary;
         animalCardEl.appendChild(animalBreedEl);
 
+        //gender
         var animalGenderEl = document.createElement("p");
         animalGenderEl.innerHTML = "Gender: " + animalArray[i].gender;
         animalCardEl.appendChild(animalGenderEl);
         
+        //email address
         var emailAddressEl = document.createElement("p");
         var emailLink = document.createElement("a");
         var email = animalArray[i].contact.email
@@ -136,6 +131,7 @@ function createAnimalCards(animals) {
         emailAddressEl.appendChild(emailLink);
         animalCardEl.appendChild(emailAddressEl);
 
+        //pet src page
         var petPetfinderUrlEl = document.createElement("a");
         //var petUrlLink = document.createElement("a")
         var petPageLink = animalArray[i].url;
@@ -153,12 +149,14 @@ function createAnimalCards(animals) {
         cardContainerEl.appendChild(animalCardEl);
         
     }
+    //creates glide carousel
     new Glide('.glide', {
         type: 'carousel',
         startAt: 0,
         perView: 4
     }).mount()
 }
+
 
 //Adding TomTom Stuff
 
@@ -208,5 +206,5 @@ createMarker('accident.colors-white.jpg', [-78.17043537427266, 36.31817544230164
 // }).mount()
 
 
-// when user clicks submit btn, runs function for everything
+// when user clicks submit btn, runs function for pet search
 submitBtn.addEventListener("click", submitFormHandler);

@@ -163,12 +163,17 @@ header p {
     background-color: var(--secondary);
     text-align: center;
     border-radius: 10px;
-    box-shadow: 5px 5px 5px black;
+    box-shadow: 5px 5px 5px var(--tertiary);
+    
 }
 
 .glide__slide h3 {
     font-size: 1.4em;
     font-style: oblique;
+    background-color: lightgrey;
+    border-bottom: 1px solid var(--tertiary);
+    box-shadow: 1px 1px 1px var(--tertiary);
+    border-radius: 10px 10px 0 0;
 }
 
 .glide__slide p {
@@ -178,6 +183,7 @@ header p {
 .animal-photo {
     height: 150px;
     width: 150px;
+    
 }
 
 .arrow-container {
