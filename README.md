@@ -10,7 +10,6 @@ Live URL:
 - [Final Product](#Final-Product)
 - [Planning](#Planning)
 - [Challenges](#Challenges)
-- [Contributing](#contributing)
 
 ## Final Product
 
