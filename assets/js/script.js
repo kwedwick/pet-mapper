@@ -1,5 +1,7 @@
 submitBtn = document.getElementById("submitBtn");
 var cardContainerEl = document.getElementById("cardContainer");
+var savedPetContainerEl = document.getElementById("savedPetContainer")
+var savedPetsArray = [];
 
 
 // function that retrieves jobs that meet avg and location
@@ -83,6 +85,7 @@ function createAnimalCards(animals) {
 
         //li element
         var animalCardEl = document.createElement("li");
+        animalCardEl.setAttribute("id", animalArray[i])
         $(animalCardEl).addClass("glide__slide");
         
         //animal name
@@ -148,6 +151,13 @@ function createAnimalCards(animals) {
         //appending card to carousel
         cardContainerEl.appendChild(animalCardEl);
         
+        var saveButtonEl = document.createElement("button");
+        saveButtonEl.innerHTML = "Save";
+        saveButtonEl.addEventListener("click", function(){
+           savePetCard();
+        });
+        animalCardEl.appendChild(saveButtonEl);
+
     }
     //creates glide carousel
     new Glide('.glide', {
@@ -157,6 +167,13 @@ function createAnimalCards(animals) {
     }).mount()
 }
 
+function savePetCard() {
+    //$(this).attr("img", ".animal-photo")
+    //let petCardEl = document.getElementsByClassName(".glide__slide").cloneNode(true);
+    $(".glide__slide").clone().appendTo(savedPetContainerEl);
+    //petCardEl.setAttribute("id", savedPetsArray[i]);
+    //savedPetContainerEl.appendChild(petCardEl);
+}
 
 //Adding TomTom Stuff
 
