@@ -8,7 +8,7 @@ var savedPetsArray = [];
 //from indeed
 var getPetfinderResults = function (animal, city, state) {
     var error = document.getElementById("error")
-    error.innerHTML= "";
+    error.innerHTML = "";
 
     //test to see what values are being sent here
 
@@ -39,9 +39,9 @@ var getPetfinderResults = function (animal, city, state) {
             if (response.ok) {
                 return response.json();
             } else {
-                error.innerHTML = "<span style='color: red;'>" + " Please enter a valid City</span>"  
+                error.innerHTML = "<span style='color: red;'>" + " Please enter a valid City</span>"
             }
-            
+
         }).then(function (data) {
             createAnimalCards(data.animals)
         })
@@ -56,14 +56,14 @@ var submitFormHandler = function (event) {
     var animal = $('#animalDropDown').val().toLowerCase();// capture animal
     var city = $('#cityEntry').val().trim().toLowerCase() //.split(" ").join(""); capture city
     var state = $('#stateDropDown').val().toLowerCase(); // capture state
-    
+
     // send state to api call  
     if (city) { // if city and state entered
         cityEntry.value = "";
         getPetfinderResults(animal, city, state);
     } else {
         //need another option; she said no alerts
-        error.innerHTML = "<span style='color: red;'>" + " Please enter a valid City</span>"  
+        error.innerHTML = "<span style='color: red;'>" + " Please enter a valid City</span>"
     }
 
     // create title divs for city and state
@@ -81,38 +81,39 @@ function createAnimalCards(animals) {
     var animalArray = animals //creating array to hold animal data
     console.log(animalArray)
 
-    for (var i = 0; i <animalArray.length; i++) { // cycle through fetch array
+    for (var i = 0; i < animalArray.length; i++) { // cycle through fetch array
 
+        let id = "petcard-" + i;
         //li element
         var animalCardEl = document.createElement("li");
-        animalCardEl.setAttribute("id", animalArray[i])
+        animalCardEl.setAttribute("id", id)
         $(animalCardEl).addClass("glide__slide");
-        
+
         //animal name
         var animalNameEl = document.createElement("h3");
         animalNameEl.innerHTML = animalArray[i].name;
         animalCardEl.appendChild(animalNameEl);
 
         if (animalArray[i].primary_photo_cropped === null) {
-        //no photo
-        var animalImgEl = document.createElement("p");
-        animalImgEl.innerHTML = "No Photo Available"
-        animalCardEl.appendChild(animalImgEl);
+            //no photo
+            var animalImgEl = document.createElement("p");
+            animalImgEl.innerHTML = "No Photo Available"
+            animalCardEl.appendChild(animalImgEl);
 
         } else if (animalArray[i].primary_photo_cropped !== null) {
-        //append photo
-        var animalImgEl = document.createElement("img");
-        var animalPhoto = animalArray[i].primary_photo_cropped.small
-        animalImgEl.setAttribute("src", animalPhoto)
-        $(animalImgEl).addClass("animal-photo")
-        animalCardEl.appendChild(animalImgEl);
+            //append photo
+            var animalImgEl = document.createElement("img");
+            var animalPhoto = animalArray[i].primary_photo_cropped.small
+            animalImgEl.setAttribute("src", animalPhoto)
+            $(animalImgEl).addClass("animal-photo")
+            animalCardEl.appendChild(animalImgEl);
         }
-    
+
         //city, state
         var animalLocationEl = document.createElement("p");
         animalLocationEl.innerHTML = "Location: " + animalArray[i].contact.address.city + ", " + animalArray[i].contact.address.state;
         animalCardEl.appendChild(animalLocationEl);
-        
+
         //breed
         var animalBreedEl = document.createElement("p");
         animalBreedEl.innerHTML = "Primary Breed: " + animalArray[i].breeds.primary;
@@ -122,7 +123,7 @@ function createAnimalCards(animals) {
         var animalGenderEl = document.createElement("p");
         animalGenderEl.innerHTML = "Gender: " + animalArray[i].gender;
         animalCardEl.appendChild(animalGenderEl);
-        
+
         //email address
         var emailAddressEl = document.createElement("p");
         var emailLink = document.createElement("a");
@@ -147,16 +148,19 @@ function createAnimalCards(animals) {
         // var animalOrgLocationEl = document.createElement("p");
         // animalOrgLocationEl.innerHTML = animalArray[i].organization;
         // animalCardEl.appendChild(animalOrgLocationEl);
-       
+
         //appending card to carousel
-        cardContainerEl.appendChild(animalCardEl);
-        
         var saveButtonEl = document.createElement("button");
         saveButtonEl.innerHTML = "Save";
-        saveButtonEl.addEventListener("click", function(){
-           savePetCard();
+        saveButtonEl.addEventListener("click", function () {
+            savePetCard(id);
         });
+        $(saveButtonEl).addClass("save-pet-btn")
         animalCardEl.appendChild(saveButtonEl);
+
+        cardContainerEl.appendChild(animalCardEl);
+
+
 
     }
     //creates glide carousel
@@ -164,15 +168,20 @@ function createAnimalCards(animals) {
         type: 'carousel',
         startAt: 0,
         perView: 4
-    }).mount()
+    }).mount();
 }
 
-function savePetCard() {
-    //$(this).attr("img", ".animal-photo")
-    //let petCardEl = document.getElementsByClassName(".glide__slide").cloneNode(true);
-    $(".glide__slide").clone().appendTo(savedPetContainerEl);
-    //petCardEl.setAttribute("id", savedPetsArray[i]);
-    //savedPetContainerEl.appendChild(petCardEl);
+function savePetCard(id) {
+    console.log(id)
+
+    $("#" + id)
+    .clone()
+    .removeAttr("id")
+    .attr("id", "#savedPet-"+ savedPetsArray.length)
+    .removeClass("glide__slide")
+    .addClass("saved-petcard")
+    .appendTo(savedPetContainerEl);
+   
 }
 
 //Adding TomTom Stuff
