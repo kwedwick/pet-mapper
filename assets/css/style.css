@@ -159,8 +159,8 @@ header p {
 
 
 .saved-petcard {
-    display: block;
-    height: fit-content;
+    display: grid;
+    height: 400px;
     margin: 5px;
     font-size: 1em;
     background-color: var(--secondary);
@@ -171,6 +171,7 @@ header p {
 
 .saved-petcard h3 {
     font-size: 1em;
+    margin-bottom: 0;
     font-style: oblique;
     background-color: lightgrey;
     border-bottom: 1px solid var(--tertiary);
@@ -202,18 +203,25 @@ header p {
     color: var(--secondary);
     padding: 20px;
     font-size: 2em;
+    margin-bottom: 0;
 }
 
-.glide__slide{
-    height: 450px;
+.glide__slide {
+    height: 425px;
     background-color: var(--secondary);
     text-align: center;
     border-radius: 10px;
     box-shadow: 5px 5px 5px var(--tertiary);
+    display: grid;
+}
+
+.placeholder-petCard {
+    display: block;
 }
 
 .glide__slide h3 {
     font-size: 1.4em;
+    margin-bottom: 0;
     font-style: oblique;
     background-color: lightgrey;
     border-bottom: 1px solid var(--tertiary);
@@ -221,23 +229,31 @@ header p {
     border-radius: 10px 10px 0 0;
 }
 
+
 .glide__slide p {
     margin-bottom: 0;
-    font-size: 1vw;
+    font-size: 1.4;
 }
 
+.img-container {
+    display: flex;
+    justify-content: center;
+}
 .animal-photo {
     height: 150px;
     width: 150px;
-    
+    margin: 5px 5px 0 5px;
+    align-self: center;
 }
 
 .save-pet-btn {
-    display: inline;
+    display: block;
     background-color: var(--primary);
     color: var(--secondary);
     font-size: 1em;
     margin: 5px;
+    border-radius: 10px;
+    
 }
 
 .arrow-container {

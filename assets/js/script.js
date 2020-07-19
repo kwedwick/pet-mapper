@@ -102,11 +102,14 @@ function createAnimalCards(animals) {
 
         } else if (animalArray[i].primary_photo_cropped !== null) {
             //append photo
+            var animalImgContainer = document.createElement("div")
+            $(animalImgContainer).addClass("img-container")
             var animalImgEl = document.createElement("img");
-            var animalPhoto = animalArray[i].primary_photo_cropped.small
-            animalImgEl.setAttribute("src", animalPhoto)
-            $(animalImgEl).addClass("animal-photo")
-            animalCardEl.appendChild(animalImgEl);
+            var animalPhoto = animalArray[i].primary_photo_cropped.small;
+            animalImgEl.setAttribute("src", animalPhoto);
+            $(animalImgEl).addClass("animal-photo");
+            animalImgContainer.appendChild(animalImgEl);
+            animalCardEl.appendChild(animalImgContainer);
         }
 
         //city, state
