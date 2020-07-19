@@ -51,7 +51,6 @@ header p {
     background-color: rgba(248, 248, 248, 0.3);
     padding: 20px;
     margin-right: 50px;
-    padding: 10px;
     box-shadow: 5px 5px 5px var(--boxshadow);
 }
 
@@ -70,12 +69,12 @@ header p {
     display: grid;
     margin: 20px 50px;
     grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto;
     grid-gap: 20px;
-    grid-column-start: 0;
-    grid-column-end: 1;
     
 }
 
+/* search form */
 .search-wrapper {
     background-color: var(--primary);
     padding: 10px;
@@ -129,6 +128,9 @@ header p {
     color: var(--secondary);
 }
 
+/* search container end */
+
+/* saved pet section */
 .search-results {
     background: var(--hover);
     border-radius: 10px;
@@ -149,16 +151,16 @@ header p {
 }
 
 .search-list-container {
-display: grid;
-flex-wrap: wrap;
-list-style: none;
-grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    flex-wrap: wrap;
+    list-style: none;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 
 .saved-petcard {
-    height: 350px;
-    width: fit-content;
+    display: block;
+    height: fit-content;
     margin: 5px;
     font-size: 1em;
     background-color: var(--secondary);
@@ -168,7 +170,7 @@ grid-template-columns: repeat(3, 1fr);
 }
 
 .saved-petcard h3 {
-    font-size: 1.4em;
+    font-size: 1em;
     font-style: oblique;
     background-color: lightgrey;
     border-bottom: 1px solid var(--tertiary);
@@ -184,15 +186,16 @@ grid-template-columns: repeat(3, 1fr);
     margin-bottom: 0;
 }
 
+/* saved pets end */
 
-/* search container end */
+
 /* Glide carousel start */
-
 .glider-container {
     margin: 0 50px;
     background-color: var(--hover);
     padding: 0 30px;
     border-radius: 10px;
+    column-span: 2;
 }
 .glider-container h2 {
     text-align: center;
@@ -203,7 +206,6 @@ grid-template-columns: repeat(3, 1fr);
 
 .glide__slide{
     height: 450px;
-    font-size: 1.2em;
     background-color: var(--secondary);
     text-align: center;
     border-radius: 10px;
@@ -221,6 +223,7 @@ grid-template-columns: repeat(3, 1fr);
 
 .glide__slide p {
     margin-bottom: 0;
+    font-size: 1vw;
 }
 
 .animal-photo {
@@ -259,6 +262,7 @@ grid-template-columns: repeat(3, 1fr);
 }
 
 /* Glide carousel end */
+
 /* map start */
 
 .map-container {
@@ -339,3 +343,97 @@ grid-template-columns: repeat(3, 1fr);
     text-align: end;
 }
 
+/* footer end */
+
+/* media query start*/
+
+/* media query for smaller desktop screens*/
+@media screen and (max-width: 1024px) {
+    header {
+        text-align: center;
+    }
+
+    .main-container {
+        display: inline;
+    }
+    .search-wrapper {
+        margin: 0 20px;
+    }
+    
+    .hero {
+        justify-content: center;
+    }
+    .about-us-hero {
+        text-align: center;
+        margin: 0;
+        padding: 5px;
+    }
+    .search-results {
+        margin: 0 20px;
+    }
+    .search-list-container {
+        grid-template-columns: repeat(2, 1fr);
+        }
+    .glider-container {
+        margin: 0 20px;
+    }
+
+
+
+    .map {
+        width: 700px;
+        height: 700px;
+    }
+}
+
+
+
+@media screen and (max-width: 980px) {
+    .map {
+        width: 600px;
+        height: 600px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .saved-petcard {  
+    }
+    .hero {
+        height: 400px;
+    }
+    .glide__slide p {
+        margin-bottom: 0;
+        font-size: 0.7em;
+    }
+    .glide__slide a {
+        font-size: 0.7em;
+    }
+    .map {
+        width: 400px;
+        height: 400px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        font-size: 3.2vw;
+    }
+    .hero {
+        height: 300px;
+    }
+    .search-list-container {
+        grid-template-columns: 1fr;
+    }
+    .glide__slide{
+        height: 550px;
+    }
+    .map {
+        width: 300px;
+    }
+}
+@media screen and (max-width: 360px) {
+    .map {
+        width: 200px;
+    }
+}
