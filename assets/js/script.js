@@ -10,8 +10,8 @@ var getPetfinderResults = function (animal, city, state) {
 
     //test to see what values are being sent here
 
-    var key = "d9CrIalA9BqDadPoKDdacOdlOsPFm6UDYC00zRok4S5duTHiTQ";
-    var secret = "";
+    var key = "as0hIMxDLS2WBlDgnYePXqg2sJGhYy4mzlStR3x66O05ljuHbk";
+    var secret = "esDPLqSPkxyPUBnghSTWyaIthxiPFNXgZm8T3TkM";
 
 
     // set up api call to indeed.com using city and state 
@@ -205,26 +205,48 @@ function getAddress(animals) {
         //get city
         var animalCity = animalArray[i].contact.address.city;
         //get state
-        var animalState = animalArray[i].contact.address.state;
+       var animalState = animalArray[i].contact.address.state;
          //convert animalStreetAddress to fetch request format
         var splitAnimalStreetAddressArray = animalStreetAddress.split(" ");
-        animalStreetAddress = splitAnimalStreetAddressArray.join("%20");
-        var fetchAddress = animalStreetAddress + animalCity + '%20' + animalState;
-        console.log(fetchAddress);
+       // animalStreetAddress = splitAnimalStreetAddressArray.join("%20");
+        var fetchAddress = animalStreetAddress + animalCity + '%20';
+       // console.log(fetchAddress);
          //convert address to lat and long
     var tomKey = 'ejoYhQhApDJfoTII6fG63l3BXF0tiaUV'
-    fetch('https://api.tomtom.com/search/2/geocode/' + fetchAddress + '.json?key=' + tomKey 
-        ).then(function (response) {
-            return response.json();
 
-        }).then(function (data) {
-        console.log(data)
-        var lat = data.results[0].position.lat;
-        var lon = data.results[0].position.lon;
-        createMarker('accident.colors-white.svg', [lat, lon], '#5327c3', 'SVG icon');
+    var fetchURL = 'https://api.tomtom.com/search/2/geocode/' + fetchAddress + '.json?key=' + tomKey
+ 
+    fetch(fetchURL, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: "POST"
+    }).then(function (response) {
+      return response.json();})
+      //return response.text();})
+    .then(function (data) {
+        var token = data.access_token
+        var proxyUrl = "https://cors-anywhere.herokuapp.com/"
+        var endPoint = fetchURL;
+        fetch(proxyUrl + endPoint, {
+            headers: { Authorization: "Bearer " + token
+        }
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                console.log("Manual error text")
+            }
+        }) .then(function(data) {
+            console.log(data)
+            var lat = data.results[0].position.lat;
+            var lon = data.results[0].position.lon;
+            console.log(lat);
+            console.log(lon);
+            createMarker('accident.colors-white.svg', [lat, lon], '#5327c3', 'SVG icon');
         })
-    }
-}
+    });
+}}
 
 
 
