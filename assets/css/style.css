@@ -150,18 +150,18 @@ header p {
     margin-bottom: 0;
 }
 
-.search-list-container {
+.savedPet-list-container {
     display: grid;
     flex-wrap: wrap;
     list-style: none;
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5px;
 }
 
 
 .saved-petcard {
     display: grid;
     height: 400px;
-    margin: 5px;
     font-size: 1em;
     background-color: var(--secondary);
     text-align: center;
@@ -245,6 +245,13 @@ header p {
     margin: 5px 5px 0 5px;
     align-self: center;
 }
+
+.email-style {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
 .save-pet-btn {
     display: block;
@@ -387,7 +394,7 @@ header p {
     .search-results {
         margin: 0 20px;
     }
-    .search-list-container {
+    .savedPet-list-container {
         grid-template-columns: repeat(2, 1fr);
         }
     .glider-container {
@@ -412,7 +419,8 @@ header p {
 }
 
 @media screen and (max-width: 768px) {
-    .saved-petcard {  
+    .savedPet-list-container {
+        grid-template-columns: 1fr;
     }
     .hero {
         height: 400px;
@@ -437,9 +445,6 @@ header p {
     }
     .hero {
         height: 300px;
-    }
-    .search-list-container {
-        grid-template-columns: 1fr;
     }
     .glide__slide{
         height: 550px;

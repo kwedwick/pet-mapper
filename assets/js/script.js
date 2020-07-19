@@ -135,6 +135,7 @@ function createAnimalCards(animals) {
         emailAddressEl.innerHTML = "Email: ";
         emailLink.innerHTML = email;
         emailLink.setAttribute("href", "mailto:" + email);
+        $(emailAddressEl).addClass("email-style");
         emailAddressEl.appendChild(emailLink);
         animalCardEl.appendChild(emailAddressEl);
 
@@ -148,10 +149,6 @@ function createAnimalCards(animals) {
         petPetfinderUrlEl.setAttribute("href", petPageLink);
         animalCardEl.appendChild(petPetfinderUrlEl);
 
-        // var animalOrgLocationEl = document.createElement("p");
-        // animalOrgLocationEl.innerHTML = animalArray[i].organization;
-        // animalCardEl.appendChild(animalOrgLocationEl);
-
         //appending card to carousel
         var saveButtonEl = document.createElement("button");
         saveButtonEl.innerHTML = "Save";
@@ -163,15 +160,24 @@ function createAnimalCards(animals) {
 
         cardContainerEl.appendChild(animalCardEl);
 
-
-
     }
+
+    //var Breakpoints = new Glide.Breakpoints;
+
+    //Breakpoints.match()
+
     //creates glide carousel
     new Glide('.glide', {
         type: 'carousel',
         startAt: 0,
-        perView: 4
+        perView: 4,
+        breakpoints: {
+            600: { perView: 1 },
+            800: { perView: 2 },
+            1200: { perView: 3 }
+          }
     }).mount();
+    
 }
 
 function savePetCard(id) {
@@ -181,10 +187,10 @@ function savePetCard(id) {
     .clone()
     .removeAttr("id")
     .attr("id", "#savedPet-"+ savedPetsArray.length)
+    .removeAttr("style")
     .removeClass("glide__slide")
     .addClass("saved-petcard")
     .appendTo(savedPetContainerEl);
-   
 }
 
 //Adding TomTom Stuff
