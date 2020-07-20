@@ -42,7 +42,7 @@ var getPetfinderResults = function (animal, city, state) {
             
         }).then(function (data) {
             createAnimalCards(data.animals)
-            getAddress(data.animals)
+           // getAddress(data.animals)
         })
     })
 };
@@ -193,63 +193,61 @@ function createMarker(icon, position, color, popupText) {
 }
 
 // get data to put on the map
-function getAddress(animals) {
-    var animalArray = animals
-    for (var i = 0; i <animalArray.length; i++) { 
+//function getAddress(animals) {
+  //  var animalArray = animals
+    //for (var i = 0; i <animalArray.length; i++) { 
         //get address
-        var animalStreetAddress = animalArray[i].contact.address.address1;
+      //  var animalStreetAddress = animalArray[i].contact.address.address1;
         //make sure address isn't null
-        if (!animalStreetAddress) {
-            continue;
-        }
+        //if (!animalStreetAddress) {
+          //  continue;
+        //}
         //get city
-        var animalCity = animalArray[i].contact.address.city;
+        //var animalCity = animalArray[i].contact.address.city;
         //get state
-       var animalState = animalArray[i].contact.address.state;
+       //var animalState = animalArray[i].contact.address.state;
          //convert animalStreetAddress to fetch request format
-        var splitAnimalStreetAddressArray = animalStreetAddress.split(" ");
+        //var splitAnimalStreetAddressArray = animalStreetAddress.split(" ");
        // animalStreetAddress = splitAnimalStreetAddressArray.join("%20");
-        var fetchAddress = animalStreetAddress + animalCity + '%20';
+        //var fetchAddress = animalStreetAddress;
        // console.log(fetchAddress);
          //convert address to lat and long
-    var tomKey = 'ejoYhQhApDJfoTII6fG63l3BXF0tiaUV'
 
-    var fetchURL = 'https://api.tomtom.com/search/2/geocode/' + fetchAddress + '.json?key=' + tomKey
+
+    //var tomKey = 'ejoYhQhApDJfoTII6fG63l3BXF0tiaUV'
+    //var fetchURL = 'https://api.tomtom.com/search/2/geocode/' + fetchAddress + '.json?key=' + tomKey
  
-    fetch(fetchURL, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: "POST"
-    }).then(function (response) {
-      return response.json();})
-      //return response.text();})
-    .then(function (data) {
-        var token = data.access_token
-        var proxyUrl = "https://cors-anywhere.herokuapp.com/"
-        var endPoint = fetchURL;
-        fetch(proxyUrl + endPoint, {
-            headers: { Authorization: "Bearer " + token
-        }
-        }).then(function (response) {
-            if (response.ok) {
-                return response.json();
-            } else {
-                console.log("Manual error text")
-            }
-        }) .then(function(data) {
-            console.log(data)
-            var lat = data.results[0].position.lat;
-            var lon = data.results[0].position.lon;
-            console.log(lat);
-            console.log(lon);
-            createMarker('accident.colors-white.svg', [lat, lon], '#5327c3', 'SVG icon');
-        })
-    });
-}}
-
-
-
+    //fetch(fetchURL, {
+     // headers: {
+       //     'Content-Type': 'application/json',
+        //},
+       // method: "GET"
+        //}).then(function (response) {
+          //  if (response.ok) {
+            //    return response.json();
+           // } else {
+             //  console.log("Manual error text")
+           // }
+       // }) .then(function(data) {
+         //   console.log(data)
+           // var lat = data.results[0].position.lat;
+            //var lon = results[0].position.lon;
+            //console.log(lat);
+            //console.log(lon);
+           // if (lat > 90) {
+             //   console.log("Invalid Address");
+            //} else if (lat < -90) {
+              //  console.log("Invalid Address");
+            //} else if (lon > 90) {
+              //  console.log("Invalid Address"); 
+            //} else if (lon < -90) {
+              //      console.log("Invalid Address");     
+            //} else {
+              //  createMarker('accident.colors-white.svg', [lat, lon], '#5327c3', 'SVG icon');
+            //}
+       // });
+   // }
+//}
 
 //creating JS for carousel - disabling for now
 // new Glide('.glide', {
@@ -257,7 +255,6 @@ function getAddress(animals) {
 //     startAt: 0,
 //     perView: 3
 // }).mount()
-
 
 // when user clicks submit btn, runs function for pet search
 submitBtn.addEventListener("click", submitFormHandler);
